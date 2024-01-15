@@ -51,7 +51,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">Expense Tracker</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -66,9 +66,21 @@
 
                   <form class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
+                      <label for="yourName" class="form-label">Username</label>
                       <input type="text" name="name" class="form-control" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="confirmPassword" class="form-label">Confirm password</label>
+                      <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+                      <div class="invalid-feedback">Please confirm your password!</div>
                     </div>
 
                     <div class="col-12">
@@ -78,29 +90,49 @@
                     </div>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+                      <label for="mobile" class="form-label">Mobile</label>
+                      <input type="tel" name="mobile" class="form-control" id="mobile" required>
+                      <div class="invalid-feedback">Please, enter your mobile number</div>
+                    </div>
+                     <!---******************************************custom************************************************************-->
+                    
+                     <div class="col-12">
+                      <div class="row mb-3">
+                        <label class="col-sm-10 col-form-label">Security Questions</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" id="securityQuestion" aria-label="Default select example" onchange="showTextbox()">
+                            <option selected disabled>Choose a security question</option>
+                            <option value="1">what is your pet's name?</option>
+                            <option value="2">what is your grandmother's name?</option>
+                            <option value="3">what is your favourite movie?</option>
+                          </select>
+                        </div>
+                      </div>
+                    
+                      <!-- Add textbox here initially hidden -->
+                      <div class="row mb-3" id="textboxContainer" style="display: none;">
+                        <label class="col-sm-10 col-form-label" id="textboxLabel">Additional Information</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="additionalInfo">
+                        </div>
                       </div>
                     </div>
+                    
+                    
+                    
+                  
+                 
+                    
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
-
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                      <button class="btn btn-primary w-100" onclick="checkPassword()" type="submit">Create Account</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
@@ -115,7 +147,7 @@
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
               </div>
 
             </div>
@@ -126,6 +158,37 @@
 
     </div>
   </main><!-- End #main -->
+  <script>
+    function showTextbox() {
+      var selectedOption = document.getElementById("securityQuestion");
+      var selectedValue = selectedOption.value;
+      var selectedText = selectedOption.options[selectedOption.selectedIndex].text;
+      var textboxContainer = document.getElementById("textboxContainer");
+      var textboxLabel = document.getElementById("textboxLabel");
+      var additionalInfo = document.getElementById("additionalInfo");
+  
+      // Show textbox and set label based on the selected option
+      if (selectedValue !== "Choose a security question") {
+        textboxContainer.style.display = "block";
+        textboxLabel.innerText = selectedText;
+        //additionalInfo.value = selectedText;
+      } else {
+        textboxContainer.style.display = "none";
+      }
+    }
+  
+    function checkPassword() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+  
+      if (password === confirmPassword) {
+        // Redirect to "pages-login.html" when passwords match
+        window.location.replace("pages-login.html");
+      } else {
+        alert("Passwords do not match. Please try again.");
+      }
+    }
+  </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -145,3 +208,4 @@
 </body>
 
 </html>
+
