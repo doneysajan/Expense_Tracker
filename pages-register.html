@@ -66,7 +66,7 @@
                       <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
-
+                    
                     <div class="col-12">
                       <label for="confirmPassword" class="form-label">Confirm password</label>
                       <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
@@ -76,20 +76,7 @@
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email address!</div>
-                    </div>
 
-                    <div class="col-12">
-                      <label for="mobile" class="form-label">Mobile</label>
-                      <input type="tel" name="mobile" class="form-control" id="mobile" required>
-                      <div class="invalid-feedback">Please, enter your mobile number</div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <label class="col-sm-10 col-form-label">Security Questions</label>
-                        <div class="col-sm-10">
-                          <select class="form-select" id="securityQuestion" aria-label="Default select example" onchange="showTextbox()" required>
                             <option selected disabled>Choose a security question</option>
                             <option value="1">what is your pet's name?</option>
                             <option value="2">what is your grandmother's name?</option>
@@ -104,21 +91,9 @@
                         <div class="col-sm-10">
                           <input type="text" class="form-control" id="additionalInfo">
                         </div>
-                      </div>
-                    </div>
 
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
-                    </div>
-                  </form>
-                </div>
-              </div>
+                   
 
-              <div class="credits">
-                <!-- ... (credits section) ... -->
               </div>
 
             </div>
@@ -127,9 +102,7 @@
       </section>
 
     </div>
-  </main>
 
-  <!--*******************************************************Custom************************************************************************-->
   <script>
     function showTextbox() {
       var selectedOption = document.getElementById("securityQuestion");
@@ -149,28 +122,6 @@
       }
     }
 
-    function checkPassword(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-
-    // Check if all required fields are filled
-    var form = document.getElementById("registrationForm");
-    if (!form.checkValidity()) {
-      alert("Please fill out all required fields.");
-      return;
-    }
-
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (password === confirmPassword) {
-      // Redirect to "pages-login.html" when passwords match
-      window.location.href="pages-login.html";
-    } else {
-      alert("Passwords do not match. Please try again.");
-    }
-  }
-  </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
