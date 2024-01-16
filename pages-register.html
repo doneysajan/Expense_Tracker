@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+  <title>Pages / Register - Expense Tracker</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,14 +28,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Jan 09 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -51,54 +43,70 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">Expense Tracker</span>
                 </a>
               </div><!-- End Logo -->
 
               <div class="card mb-3">
-
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter your personal details to create account</p>
+                    <p class="text-center small">Enter your personal details to create an account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form id="registrationForm" class="row g-3 needs-validation" novalidate onsubmit="checkPassword(event)">
                     <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
+                      <label for="yourName" class="form-label">Username</label>
                       <input type="text" name="name" class="form-control" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
                     <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
+                      <label for="confirmPassword" class="form-label">Confirm password</label>
+                      <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+                      <div class="invalid-feedback">Please confirm your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourEmail" class="form-label">Your Email</label>
+                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <div class="invalid-feedback">Please enter a valid Email address!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="mobile" class="form-label">Mobile</label>
+                      <input type="tel" name="mobile" class="form-control" id="mobile" required>
+                      <div class="invalid-feedback">Please, enter your mobile number</div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="row mb-3">
+                        <label class="col-sm-10 col-form-label">Security Questions</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" id="securityQuestion" aria-label="Default select example" onchange="showTextbox()" required>
+                            <option selected disabled>Choose a security question</option>
+                            <option value="1">what is your pet's name?</option>
+                            <option value="2">what is your grandmother's name?</option>
+                            <option value="3">what is your favourite movie?</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- Add textbox here initially hidden -->
+                      <div class="row mb-3" id="textboxContainer" style="display: none;">
+                        <label class="col-sm-10 col-form-label" id="textboxLabel">Additional Information</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="additionalInfo">
+                        </div>
                       </div>
                     </div>
+
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
@@ -106,26 +114,63 @@
                       <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
                     </div>
                   </form>
-
                 </div>
               </div>
 
               <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!-- ... (credits section) ... -->
               </div>
 
             </div>
           </div>
         </div>
-
       </section>
 
     </div>
-  </main><!-- End #main -->
+  </main>
+
+  <!--*******************************************************Custom************************************************************************-->
+  <script>
+    function showTextbox() {
+      var selectedOption = document.getElementById("securityQuestion");
+      var selectedValue = selectedOption.value;
+      var selectedText = selectedOption.options[selectedOption.selectedIndex].text;
+      var textboxContainer = document.getElementById("textboxContainer");
+      var textboxLabel = document.getElementById("textboxLabel");
+      var additionalInfo = document.getElementById("additionalInfo");
+
+      // Show textbox and set label based on the selected option
+      if (selectedValue !== "Choose a security question") {
+        textboxContainer.style.display = "block";
+        textboxLabel.innerText = selectedText;
+        //additionalInfo.value = selectedText;
+      } else {
+        textboxContainer.style.display = "none";
+      }
+    }
+
+    function checkPassword(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Check if all required fields are filled
+    var form = document.getElementById("registrationForm");
+    if (!form.checkValidity()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password === confirmPassword) {
+      // Redirect to "pages-login.html" when passwords match
+      window.location.href="pages-login.html";
+    } else {
+      alert("Passwords do not match. Please try again.");
+    }
+  }
+  </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -145,3 +190,5 @@
 </body>
 
 </html>
+
+
