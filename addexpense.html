@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+  <title>Forms / Elements - Expense Tracker</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,6 +36,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  
 </head>
 
 <body>
@@ -46,7 +48,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">Expense Tracker</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -505,7 +507,7 @@
                       <option value="1">Cash</option>
                       <option value="2">Credit</option>
                       <option value="3">Debit</option>
-                      <option value="3">Online</option>
+                      <option value="4">Online</option>
                     </select>
                   </div>
                 </div>
@@ -513,16 +515,26 @@
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Category</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
+                    <select id="categorySelect" class="form-select" aria-label="Default select example">
                       <option selected>Select </option>
                       <option value="1">Food</option>
                       <option value="2">Rent</option>
                       <option value="3">Electricity</option>
-                      <option value="3">Fuel</option>
-                      <option value="3">Others</option>
+                      <option value="4">Fuel</option>
+                      <option value="Others">Others</option>
                     </select>
                   </div>
                 </div>
+              
+                <div class="row mb-3" id="othersTextBoxContainer" style="display: none;">
+                  <label for="inputOther" class="col-sm-2 col-form-label">Specify Other</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Merchant Name</label>
@@ -565,7 +577,21 @@
 
 
 
-  </main><!-- End #main -->
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var categorySelect = document.getElementById("categorySelect");
+      var othersTextBoxContainer = document.getElementById("othersTextBoxContainer");
+  
+      categorySelect.addEventListener("change", function () {
+        if (categorySelect.value === "Others") {
+          othersTextBoxContainer.style.display = "block";
+        } else {
+          othersTextBoxContainer.style.display = "none";
+        }
+      });
+    });
+  </script><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <!-- <footer id="footer" class="footer">
@@ -573,13 +599,13 @@
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
+       All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-    </div>
-  <!-- </footer>End Footer --> -->
+    <!-- </div> -->
+  <!-- </footer>End Footer --> 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
