@@ -80,8 +80,8 @@
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
+                      <div class="invalid-feedback" id="passwordError">Please enter a valid password with a minimum of eight characters including special characters and numbers!</div>
+                  </div>
 
                     <div class="col-12">
                       <div class="form-check">
@@ -118,6 +118,26 @@
 
     </div>
   </main><!-- End #main -->
+  <script>
+    document.getElementById('yourPassword').addEventListener('input', function () {
+        var password = this.value;
+        var passwordError = document.getElementById('passwordError');
+
+        if (validatePassword(password)) {
+            this.setCustomValidity('');
+            passwordError.style.display = 'none';
+        } else {
+            this.setCustomValidity('Invalid Password');
+            passwordError.style.display = 'block';
+        }
+    });
+
+    function validatePassword(password) {
+        // Regular expression for a password with a minimum of eight characters including special characters and numbers
+        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    }
+</script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
