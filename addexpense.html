@@ -37,7 +37,19 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  
+  <!-- <style>
+    #othersTextBoxContainer {
+      display: none;
+    }
+
+    .col-sm-10 {
+      width: 100%;
+    }
+
+    #othersTextBoxContainer .col-sm-2 {
+      width: unset;
+    }
+  </style> -->
 </head>
 
 <body>
@@ -484,7 +496,7 @@
               <h5 class="card-title">Add Your Daily Expense Here</h5>
 
               <!-- General Form Elements -->
-              <form>
+              <form class>
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Amount</label>
                   <div class="col-sm-10">
@@ -525,12 +537,12 @@
                     </select>
                   </div>
                 </div>
-              
+            
                 <div class="row mb-3" id="othersTextBoxContainer" style="display: none;">
                   <label for="inputOther" class="col-sm-2 col-form-label">Specify Other</label>
-                  <div class="col-sm-10">
+                  <div class="col-md-8 col-lg-9">
                     <div class="input-group">
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" id="inputOther">
                     </div>
                   </div>
                 </div>
@@ -579,18 +591,15 @@
 
   </main>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var categorySelect = document.getElementById("categorySelect");
-      var othersTextBoxContainer = document.getElementById("othersTextBoxContainer");
-  
-      categorySelect.addEventListener("change", function () {
-        if (categorySelect.value === "Others") {
+    document.getElementById("categorySelect").addEventListener("change", function () {
+        var othersTextBoxContainer = document.getElementById("othersTextBoxContainer");
+
+        if (this.value === "Others") {
           othersTextBoxContainer.style.display = "block";
         } else {
           othersTextBoxContainer.style.display = "none";
         }
       });
-    });
   </script><!-- End #main -->
 
   <!-- ======= Footer ======= -->
