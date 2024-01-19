@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url(assets/img/hero-bg.png);
+            background-size: cover;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 0;
+            width: 100%;
+            margin: 0;
+            position: fixed;
+            top: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav img {
+            max-height: 40px; /* Set the maximum height of your logo image */
+            margin-right: 10px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ecf0f1;
+        }
+
+        .get-started {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .get-started:hover {
+            background-color: #27ae60;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 70px auto 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .image-container {
+            flex-basis: 60%;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .content {
+            flex-basis: 30%;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+        }
+
+        h1, p {
+            color: #1242e6;
+        }
+    </style>
+    <title>Expense Tracker</title>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            <img src="assets/img/logo.png" alt="Logo">
+            <div>Expense Tracker</div>
+        </div>
+        <ul class="nav-links">
+            <!-- <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li> -->
+            <li><a href="#">Sign Up</a></li>
+            <li><a href="#">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="content">
+        <h1>The <b>Expense Tracker</b></h1>
+        <p>That works for you.</p>
+        <a href="#" class="get-started">Get Started</a>
+    </div>
+
+    <div class="image-container">
+        <img src="assets/img/hero-img.png" alt="Your Website Image">
+    </div>
+</main>
+
+</body>
+</html>
