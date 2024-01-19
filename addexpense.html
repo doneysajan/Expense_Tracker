@@ -289,7 +289,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item" style="margin-bottom: 20px;">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -540,7 +540,7 @@
             
                 <div class="row mb-3" id="othersTextBoxContainer" style="display: none;">
                   <label for="inputOther" class="col-sm-2 col-form-label">Specify Other</label>
-                  <div class="col-md-8 col-lg-9">
+                  <div class="col-sm-10">
                     <div class="input-group">
                       <input type="text" class="form-control" id="inputOther">
                     </div>
@@ -595,7 +595,7 @@
         var othersTextBoxContainer = document.getElementById("othersTextBoxContainer");
 
         if (this.value === "Others") {
-          othersTextBoxContainer.style.display = "block";
+          othersTextBoxContainer.style.display = "flex";
         } else {
           othersTextBoxContainer.style.display = "none";
         }
