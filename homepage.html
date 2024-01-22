@@ -12,21 +12,23 @@
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             min-height: 100vh;
-            background: url(assets/img/hero-bg.png);
+            background: rgba(0, 0, 0, 0.8) url(assets/img/hero-bg.png);
             background-size: cover;
         }
 
         header {
-            background-color: #3498db;
+            background-color: #222e75;
             color: #fff;
             padding: 10px 0;
             width: 100%;
             margin: 0;
             position: fixed;
             top: 0;
+            opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fadeIn 1s forwards; /* Animation for fade-in */
         }
 
         nav {
@@ -38,7 +40,7 @@
         }
 
         nav img {
-            max-height: 40px; /* Set the maximum height of your logo image */
+            max-height: 40px;
             margin-right: 10px;
         }
 
@@ -69,7 +71,7 @@
         }
 
         .get-started {
-            background-color: #2ecc71;
+            background-color: #1a237e;
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
@@ -80,7 +82,7 @@
         }
 
         .get-started:hover {
-            background-color: #27ae60;
+            background-color: #421bdd;
         }
 
         main {
@@ -90,30 +92,59 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            transform: translateX(-50px); /* Start with main content shifted to the left */
+            opacity: 0; /* Start with main content hidden */
+            animation: slideIn 1s ease-in-out forwards; /* Apply slide-in animation */
         }
 
         .image-container {
-            flex-basis: 60%;
+            flex-basis: 30%; /* Adjusted to 30% */
         }
 
         .image-container img {
-            max-width: 100%;
+            max-width: 200%;
             height: auto;
             border-radius: 8px;
         }
 
         .content {
-            flex-basis: 30%;
-            text-align: center;
+            flex-basis: 60%;
+            text-align: right;
             font-size: 1.5rem;
             font-weight: bolder;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: left;
+            margin-left: 20px;
         }
 
-        h1, p {
+        .content h1 {
             color: #1242e6;
+            font-size: 3rem;
         }
+        .content h3 {
+            color: #57638a;
+            font-size: 1rem;
+        }
+
+        .content p {
+            color: #1242e6;
+            font-size: 1.2rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
     </style>
     <title>Expense Tracker</title>
 </head>
@@ -126,23 +157,22 @@
             <div>Expense Tracker</div>
         </div>
         <ul class="nav-links">
-            <!-- <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li> -->
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#">Sign In</a></li>
+            <li><a href="pages-register.html">Sign Up</a></li>
+            <li><a href="pages-login.html">Sign In</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
-    <div class="content">
-        <h1>The <b>Expense Tracker</b></h1>
-        <p>That works for you.</p>
-        <a href="#" class="get-started">Get Started</a>
-    </div>
-
     <div class="image-container">
         <img src="assets/img/hero-img.png" alt="Your Website Image">
+    </div>
+
+    <div class="content">
+        <h1>The <b><u>Expense Tracker</u></b></h1>
+        <p>That works for you.</p>
+        <p><h3>Tracking expenses today for a brighter financial tomorrow.</h3></p>
+        <a href="pages-register.html" class="get-started">Get Started</a>
     </div>
 </main>
 
