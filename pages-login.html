@@ -119,16 +119,15 @@
     </div>
   </main><!-- End #main -->
   <script>
-    document.getElementById('yourPassword').addEventListener('input', function () {
-        var password = this.value;
+    document.querySelector('form').addEventListener('submit', function (event) {
+        var password = document.getElementById('yourPassword').value;
         var passwordError = document.getElementById('passwordError');
 
-        if (validatePassword(password)) {
-            this.setCustomValidity('');
-            passwordError.style.display = 'none';
-        } else {
-            this.setCustomValidity('Invalid Password');
+        if (!validatePassword(password)) {
+            event.preventDefault(); // Prevent form submission
             passwordError.style.display = 'block';
+        } else {
+            passwordError.style.display = 'none';
         }
     });
 
