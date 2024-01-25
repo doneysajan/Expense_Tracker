@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <style>
+       body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.8) url(assets/img/bg8.jpg);
+    background-size: cover;
+}
+
+header {
+    background-color: #0a3365;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav img {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ecf0f1;
+}
+
+.get-started {
+    background-color: #1a237e;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.get-started:hover {
+    background-color: #421bdd;
+}
+
+main {
+    max-width: 1200px;
+    margin: 70px auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+.image-container {
+    flex-basis: 30%;
+}
+
+.image-container img {
+    max-width: 200%; /* Adjusted for responsiveness */
+    height: auto;
+    border-radius: 8px;
+}
+
+.content {
+    flex-basis: 60%;
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 20px;
+}
+
+.content h1 {
+    color: #1a237e;
+    font-size: 3rem;
+    line-height: 1.2;
+}
+
+.content h3 {
+    color: #0e17f2;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.content p {
+    color: #1a237e;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 768px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .image-container {
+        flex-basis: 100%;
+    }
+
+    .content {
+        flex-basis: 100%;
+        text-align: center;
+        margin: 0;
+        
+    }
+
+    .content h1 {
+        font-size: 2.5rem;
+        line-height: 0.5;
+    }
+
+    .content h3 {
+        font-size: 0.9rem;
+        line-height: 3;
+    }
+
+    .content p {
+        font-size: 1rem;
+        line-height: 0.5;
+    }
+}
+        
+    </style>
+    <title>Expense Tracker</title>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            <img src="assets/img/logo.png" alt="Logo">
+            <div>Expense Tracker</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="pages-register.html">Sign Up</a></li>
+            <li><a href="pages-login.html">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="image-container">
+        <img src="assets/img/hero-img.png" alt="Your Website Image">
+    </div>
+
+    <div class="content">
+        <h1 style="line-height: 0.5;">The <b><u>Expense Tracker</u></b></h1>
+        <p style="line-height: 0.5;">That works for you.</p>
+        <h3 style="margin: 0;">Tracking expenses today for a brighter financial tomorrow.</h3>
+        <a href="pages-register.html" class="get-started" style="margin-top: 10px;">Get Started</a>
+    </div>
+</main>
+
+</body>
+</html>
