@@ -85,7 +85,7 @@
                       <div class="invalid-feedback">Please, enter your mobile number</div>
                     </div>
 
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                       <div class="row mb-3">
                         <label class="col-sm-10 col-form-label">Security Questions</label>
                         <div class="col-sm-10">
@@ -96,16 +96,16 @@
                             <option value="3">what is your favourite movie?</option>
                           </select>
                         </div>
-                      </div>
+                      </div> -->
 
                       <!-- Add textbox here initially hidden -->
-                      <div class="row mb-3" id="textboxContainer" style="display: none;">
+                      <!-- <div class="row mb-3" id="textboxContainer" style="display: none;">
                         <label class="col-sm-10 col-form-label" id="textboxLabel">Additional Information</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" id="additionalInfo" required>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
@@ -131,7 +131,7 @@
 
   <!--*******************************************************Custom************************************************************************-->
   <script>
-    function showTextbox() {
+    /*function showTextbox() {
       var selectedOption = document.getElementById("securityQuestion");
       var selectedValue = selectedOption.value;
       var selectedText = selectedOption.options[selectedOption.selectedIndex].text;
@@ -147,7 +147,7 @@
       } else {
         textboxContainer.style.display = "none";
       }
-    }
+    } */
 
     function checkPassword(event) {
     // Prevent the default form submission behavior
