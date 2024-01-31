@@ -57,7 +57,7 @@
                   <form id="registrationForm" class="row g-3 needs-validation" novalidate onsubmit="checkPassword(event)">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Username</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
+                      <input type="text" name="fullname" class="form-control" id="fullname" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
@@ -75,7 +75,7 @@
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <input type="email" name="email" class="form-control" id="email" required>
                       <div class="invalid-feedback">Please enter a valid Email address!</div>
                     </div>
 
@@ -130,7 +130,9 @@
   </main>
 
   <!--*******************************************************Custom************************************************************************-->
-  <script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+ <script>
     /*function showTextbox() {
       var selectedOption = document.getElementById("securityQuestion");
       var selectedValue = selectedOption.value;
@@ -148,12 +150,10 @@
         textboxContainer.style.display = "none";
       }
     } */
+  
+  const checkPassword = async(event) => {
+  event.preventDefault();
 
-    function checkPassword(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-
-    // Check if all required fields are filled
     var form = document.getElementById("registrationForm");
     if (!form.checkValidity()) {
       alert("Please fill out all required fields.");
@@ -163,38 +163,47 @@
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
 
-    if (password === confirmPassword) {
-      // Redirect to "pages-login.html" when passwords match
-      window.location.href="pages-login.html";
-    } else {
+    // Password validation rules
+    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
+
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters.");
+      return;
+    } else if (!passwordRegex.test(password)) {
+      alert("Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+      return;
+    } else if (password !== confirmPassword) {
       alert("Passwords do not match. Please try again.");
+      return;
     }
-  }
-  
-  function checkPassword(event) {
-  event.preventDefault();
 
-  var form = document.getElementById("registrationForm");
-  if (!form.checkValidity()) {
-    alert("Please fill out all required fields.");
-    return;
-  }
+    const formData = new FormData();
+    formData.append('fullname', document.getElementById('fullname').value);
+    formData.append('password', document.getElementById('password').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('mobile', document.getElementById('mobile').value);
+    console.log(formData);
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost/Expense_Tracker_Backend/registration.php',
+        data: formData
+      });
 
-  var password = document.getElementById("password").value;
-  var confirmPassword = document.getElementById("confirmPassword").value;
+      console.log(response.data);
+      // Handle the response as needed
+      if (response.data.success) {
+      alert("User registered successfully!");
+    } else {
+      alert("User registration failed. Please try again.");
+    }
 
-  // Password validation rules
-  var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
 
-  if (password.length < 8) {
-    alert("Password must be at least 8 characters.");
-  } else if (!passwordRegex.test(password)) {
-    alert("Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
-  } else if (password !== confirmPassword) {
-    alert("Passwords do not match. Please try again.");
-  } else {
-    window.location.href = "pages-login.html";
-  }
+      } catch (error) {
+          console.error('Error submitting the form:', error);
+          // Handle errors
+      }
+
   }
 
   
