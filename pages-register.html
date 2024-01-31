@@ -184,21 +184,18 @@
   var confirmPassword = document.getElementById("confirmPassword").value;
 
   // Password validation rules
-  var hasUpperCase = /[A-Z]/.test(password);
-  var hasLowerCase = /[a-z]/.test(password);
-  var hasDigit = /\d/.test(password);
-  var hasSpecialChar = /[@$!%*?&]/.test(password);
+  var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
 
-  if (password.length >= 8 && hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar) {
-    if (password === confirmPassword) {
-      window.location.href = "pages-login.html";
-    } else {
-      alert("Passwords do not match. Please try again.");
-    }
+  if (password.length < 8) {
+    alert("Password must be at least 8 characters.");
+  } else if (!passwordRegex.test(password)) {
+    alert("Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+  } else if (password !== confirmPassword) {
+    alert("Passwords do not match. Please try again.");
   } else {
-    alert("Password must be at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+    window.location.href = "pages-login.html";
   }
-}
+  }
 
   
   </script>
