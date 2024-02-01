@@ -66,20 +66,19 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate action="index.html" >
-
+                  <form id="loginForm" class="row g-3 needs-validation" novalidate onsubmit="loginUser(event)">
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
-                      </div>
+                        <label for="yourUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">Please enter your username.</div>
+                        </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback" id="passwordError">Please enter a valid password with a minimum of eight characters including special characters and numbers!</div>
                   </div>
 
@@ -118,25 +117,49 @@
 
     </div>
   </main><!-- End #main -->
+<!-- Include Axios library (make sure it's loaded before this script) -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
-    document.querySelector('form').addEventListener('submit', function (event) {
-        var password = document.getElementById('yourPassword').value;
-        var passwordError = document.getElementById('passwordError');
+  const loginUser = async (event) => {
+    event.preventDefault();
 
-        if (!validatePassword(password)) {
-            event.preventDefault(); // Prevent form submission
-            passwordError.style.display = 'block';
-        } else {
-            passwordError.style.display = 'none';
-        }
-    });
-
-    function validatePassword(password) {
-        // Regular expression for a password with a minimum of eight characters including special characters, numbers, and additional characters # and ^
-        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
-        return passwordRegex.test(password);
+    var form = document.getElementById("loginForm");
+    if (!form.checkValidity()) {
+      alert("Please fill out all required fields.");
+      return;
     }
+
+    const formData = new FormData();
+    formData.append('email', document.getElementById('email').value);
+    formData.append('password', document.getElementById('password').value);
+
+
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost/Internship/Expense_Tracker_Backend/login.php',
+        data: formData
+      });
+
+      console.log(response.data);
+      if (response.data.success) {
+        alert("Login successful!");
+        // Redirect to the home page or any other authorized page
+        window.location.href = 'http://localhost/Internship/Expense_Tracker/index.html';
+       
+
+      } else {
+        alert(response.data.message || "Login failed. Please check your credentials.");
+      }
+
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert("An error occurred while processing your request. Please try again.");
+    }
+  }
 </script>
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
