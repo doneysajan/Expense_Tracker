@@ -134,11 +134,10 @@
     formData.append('email', document.getElementById('email').value);
     formData.append('password', document.getElementById('password').value);
 
-
     try {
       const response = await axios({
         method: 'post',
-        url: 'http://localhost/Internship/Expense_Tracker_Backend/login.php',
+        url: 'http://localhost/Expense_Tracker_Backend/login.php',
         data: formData
       });
 
@@ -146,7 +145,7 @@
       if (response.data.success) {
         alert("Login successful!");
         // Redirect to the home page or any other authorized page
-        window.location.href = 'http://localhost/Internship/Expense_Tracker/index.html';
+        window.location.href = 'http://localhost/Expense_Tracker/index.html';
        
 
       } else {
@@ -159,7 +158,6 @@
     }
   }
 </script>
-
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
