@@ -132,81 +132,81 @@
   <!--*******************************************************Custom************************************************************************-->
   
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
- <script>
-    /*function showTextbox() {
-      var selectedOption = document.getElementById("securityQuestion");
-      var selectedValue = selectedOption.value;
-      var selectedText = selectedOption.options[selectedOption.selectedIndex].text;
-      var textboxContainer = document.getElementById("textboxContainer");
-      var textboxLabel = document.getElementById("textboxLabel");
-      var additionalInfo = document.getElementById("additionalInfo");
-
-      // Show textbox and set label based on the selected option
-      if (selectedValue !== "Choose a security question") {
-        textboxContainer.style.display = "block";
-        textboxLabel.innerText = selectedText;
-        //additionalInfo.value = selectedText;
-      } else {
-        textboxContainer.style.display = "none";
-      }
-    } */
+  <script>
+    const checkPassword = async(event) => {
+      event.preventDefault();
   
-  const checkPassword = async(event) => {
-  event.preventDefault();
-
-    var form = document.getElementById("registrationForm");
-    if (!form.checkValidity()) {
-      alert("Please fill out all required fields.");
-      return;
-    }
-
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
-
-    // Password validation rules
-    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
-
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters.");
-      return;
-    } else if (!passwordRegex.test(password)) {
-      alert("Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
-      return;
-    } else if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('fullname', document.getElementById('fullname').value);
-    formData.append('password', document.getElementById('password').value);
-    formData.append('email', document.getElementById('email').value);
-    formData.append('mobile', document.getElementById('mobile').value);
-    console.log(formData);
-    try {
-      const response = await axios({
-        method: 'post',
-        url: 'http://localhost/Expense_tracker_backend/registration.php',
-        data: formData
-      });
-
-      console.log(response.data);
-      // Handle the response as needed
-      if (response.data.success) {
-      alert("User registered successfully!");
-    } else {
-      alert("User registration failed. Please try again.");
-    }
-
+      var form = document.getElementById("registrationForm");
+      if (!form.checkValidity()) {
+        alert("Please fill out all required fields.");
+        return;
+      }
+  
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+  
+      // Password validation rules
+      var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
+  
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters.");
+        return;
+      } else if (!passwordRegex.test(password)) {
+        alert("Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+        return;
+      } else if (password !== confirmPassword) {
+        alert("Passwords do not match. Please try again.");
+        return;
+      }
+  
+      // Email validation
+      var email = document.getElementById("email").value;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid Email address.");
+        return;
+      }
+  
+      // Mobile number validation
+      var mobile = document.getElementById("mobile").value;
+      var mobileRegex = /^\d{10}$/;
+  
+      if (!mobileRegex.test(mobile)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append('fullname', document.getElementById('fullname').value);
+      formData.append('password', document.getElementById('password').value);
+      formData.append('email', email);
+      formData.append('mobile', mobile);
+      console.log(formData);
+  
+      try {
+        const response = await axios({
+          method: 'post',
+          url: 'http://localhost/Expense_tracker_backend/registration.php',
+          data: formData
+        });
+  
+        console.log(response.data);
+        // Handle the response as needed
+        if (response.data.success) {
+          alert("User registered successfully!");
+        } else {
+          alert("User registration failed. Please try again.");
+        }
+  
       } catch (error) {
-          console.error('Error submitting the form:', error);
-          // Handle errors
+        console.error('Error submitting the form:', error);
+        // Handle errors
       }
-
-  }
-
-  
+    }
   </script>
+  
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
