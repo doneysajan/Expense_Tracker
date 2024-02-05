@@ -269,7 +269,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -496,25 +496,25 @@
               <h5 class="card-title">Add Your Daily Expense Here</h5>
 
               <!-- General Form Elements -->
-              <form class>
+              <form id="expenseForm">
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Amount</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control">
+                    <input type="number" id="amount"  name="amount" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control">
+                    <input type="date" id="date" name="date" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Payment Method</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" id="payment" name="payment" aria-label="Default select example">
                       <option selected>Select</option>
                       <option value="1">Cash</option>
                       <option value="2">Credit</option>
@@ -527,7 +527,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Category</label>
                   <div class="col-sm-10">
-                    <select id="categorySelect" class="form-select" aria-label="Default select example">
+                    <select id="maincategory"  name="maincategory" class="form-select" aria-label="Default select example">
                       <option selected>Select </option>
                       <option value="1">Food</option>
                       <option value="2">Rent</option>
@@ -538,11 +538,11 @@
                   </div>
                 </div>
             
-                <div class="row mb-3" id="othersTextBoxContainer" style="display: none;">
-                  <label for="inputOther" class="col-sm-2 col-form-label">Specify Other</label>
+                <div class="row mb-3" id="othersTextBoxContainer"  style="display: none;">
+                  <label for="inputOther"  class="col-sm-2 col-form-label">Specify Other</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="inputOther">
+                      <input type="text" class="form-control" name="othersTextBoxContainer">
                     </div>
                   </div>
                 </div>
@@ -551,21 +551,21 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Merchant Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" id="merchantname" name="merchantname" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Notes</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" style="height: 100px"></textarea>
+                    <textarea class="form-control" id="notes" name="notes" style="height: 100px"></textarea>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Reciepts</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" id="formFile" name="receipts">
                   </div>
                 </div>
                 
@@ -585,22 +585,53 @@
         </div>
       </div>
     </section>
-
-
-
-
   </main>
-  <script>
-    document.getElementById("categorySelect").addEventListener("change", function () {
-        var othersTextBoxContainer = document.getElementById("othersTextBoxContainer");
 
-        if (this.value === "Others") {
-          othersTextBoxContainer.style.display = "flex";
-        } else {
-          othersTextBoxContainer.style.display = "none";
-        }
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('maincategory').addEventListener('change', function () {
+    var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
+    if (this.value === 'Others') {
+      othersTextBoxContainer.style.display = 'flex';
+    } else {
+      othersTextBoxContainer.style.display = 'none';
+    }
+  });
+
+  const expenseForm = document.getElementById('expenseForm');
+  expenseForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const formData = new FormData(expenseForm);
+
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost/Expense_tracker_backend/expense.php',
+        data: formData,
       });
-  </script><!-- End #main -->
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+});
+
+</script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <!-- <footer id="footer" class="footer">
