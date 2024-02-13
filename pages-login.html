@@ -164,7 +164,7 @@ const loginUser = async (event) => {
     try {
         const response = await axios({
             method: 'post',
-            url: 'http://localhost/Expense_Tracker_Backend/login.php',
+            url: 'http://localhost/expense_tracker_laravel/public/api/login',
             data: formData
         });
 
