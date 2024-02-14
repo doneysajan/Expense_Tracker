@@ -475,6 +475,11 @@
         data: formData,
       });
       console.log(response.data);
+      if (response.data.success) {
+            alert("Expense added successfully!");
+            } else {
+              alert(response.data.message || "Uable to add Expenses");
+            }
     } catch (error) {
       console.error(error);
     }
