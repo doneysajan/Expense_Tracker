@@ -323,8 +323,8 @@
       </li><!-- End Tables Nav -->
 
       <li class="nav-item" style="margin-bottom: 20px;">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Analytics</span>
+        <a class="nav-link collapsed" href="analytics.html">
+          <i class="bi bi-bar-chart"></i><span>Analytics</span>
         </a>
 
       </li>
@@ -339,7 +339,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Add Expense</li>
+          <li class="breadcrumb-item active">Add Expense</li>
           <!-- <li class="breadcrumb-item active">Elements</li> -->
         </ol>
       </nav>
@@ -354,7 +354,7 @@
               <h5 class="card-title">Add Your Daily Expense Here</h5>
 
               <!-- General Form Elements -->
-              <form id="expenseForm">
+              <form id="expenseForm" enctype="multipart/form-data">
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Amount</label>
                   <div class="col-sm-10">
@@ -423,7 +423,7 @@
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Reciepts</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" name="receipts">
+                    <input class="form-control" type="file" id="formFile" name="receipt">
                   </div>
                 </div>
                 
@@ -450,38 +450,38 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    // Set the max attribute of the date input to today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("date").setAttribute("max", today);
     document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('maincategory').addEventListener('change', function () {
-        var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
-        if (this.value === 'Others') {
-          othersTextBoxContainer.style.display = 'flex';
-        } else {
-          othersTextBoxContainer.style.display = 'none';
-        }
+  document.getElementById('maincategory').addEventListener('change', function () {
+    var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
+    if (this.value === 'Others') {
+      othersTextBoxContainer.style.display = 'flex';
+    } else {
+      othersTextBoxContainer.style.display = 'none';
+    }
+  });
+
+  const expenseForm = document.getElementById('expenseForm');
+  expenseForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const formData = new FormData(expenseForm);
+
+    try {
+      const response = await axios({
+        method: 'post',
+        url:'http://localhost/expense_tracker_laravel/public/api/store',
+        data: formData,
       });
-  
-      const expenseForm = document.getElementById('expenseForm');
-      expenseForm.addEventListener('submit', async function (event) {
-        event.preventDefault();
-        const formData = new FormData(expenseForm);
-  
-        try {
-          const response = await axios({
-            method: 'post',
-            url: 'http://localhost/expense_tracker_laravel/public/api/store',
-            data: formData,
-          });
-  
-          if (response.status === 200) {
-            alert('Expense added successfully!');
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      });
-    });
-  </script>
-  
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+});
+
+</script>
   
   <!-- End #main -->
 
