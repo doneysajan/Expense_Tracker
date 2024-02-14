@@ -323,8 +323,8 @@
       </li><!-- End Tables Nav -->
 
       <li class="nav-item" style="margin-bottom: 20px;">
-        <a class="nav-link collapsed" href="analytics.html">
-          <i class="bi bi-bar-chart"></i><span>Analytics</span>
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Analytics</span>
         </a>
 
       </li>
@@ -339,7 +339,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Add Expense</li>
+          <li class="breadcrumb-item">Add Expense</li>
           <!-- <li class="breadcrumb-item active">Elements</li> -->
         </ol>
       </nav>
@@ -450,38 +450,38 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    // Set the max attribute of the date input to today
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementById("date").setAttribute("max", today);
     document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('maincategory').addEventListener('change', function () {
-    var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
-    if (this.value === 'Others') {
-      othersTextBoxContainer.style.display = 'flex';
-    } else {
-      othersTextBoxContainer.style.display = 'none';
-    }
-  });
-
-  const expenseForm = document.getElementById('expenseForm');
-  expenseForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const formData = new FormData(expenseForm);
-
-    try {
-      const response = await axios({
-        method: 'post',
-        url:'http://localhost/expense_tracker_laravel/public/api/store',
-        data: formData,
+      document.getElementById('maincategory').addEventListener('change', function () {
+        var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
+        if (this.value === 'Others') {
+          othersTextBoxContainer.style.display = 'flex';
+        } else {
+          othersTextBoxContainer.style.display = 'none';
+        }
       });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-});
-
-</script>
+  
+      const expenseForm = document.getElementById('expenseForm');
+      expenseForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const formData = new FormData(expenseForm);
+  
+        try {
+          const response = await axios({
+            method: 'post',
+            url: 'http://localhost/expense_tracker_laravel/public/api/store',
+            data: formData,
+          });
+  
+          if (response.status === 200) {
+            alert('Expense added successfully!');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    });
+  </script>
+  
   
   <!-- End #main -->
 
