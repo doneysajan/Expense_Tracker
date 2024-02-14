@@ -610,7 +610,7 @@
     try {
       const response = await axios({
         method: 'post',
-        url: 'http://localhost/Expense_tracker_backend/expense.php',
+        url:'http://localhost/expense_tracker_laravel/public/api/store',
         data: formData,
       });
       console.log(response.data);
