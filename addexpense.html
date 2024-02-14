@@ -450,6 +450,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    // Set the max attribute of the date input to today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("date").setAttribute("max", today);
     document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('maincategory').addEventListener('change', function () {
     var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
