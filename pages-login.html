@@ -181,9 +181,13 @@ const loginUser = async (event) => {
                 setCookie('rememberedUser', '', -1);
                 setCookie('rememberedPassword', '', -1);
             }
-
+            var userDetails = {
+              'fullname' : response.data.fullname
+            };
+            console.log(userDetails);
+            window.localStorage.setItem('expense_tracker_app_session', JSON.stringify(userDetails));
             // Redirect to the home page or any other authorized page
-            window.location.href = 'http://localhost/Expense_Tracker/index.html';
+            // window.location.href = 'http://localhost/Expense_Tracker/index.html';
         } else {
             alert(response.data.message || "Login failed. Please check your credentials.");
         }
@@ -221,6 +225,8 @@ window.onload = function() {
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+ 
 
 </body>
 
