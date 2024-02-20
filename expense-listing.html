@@ -469,6 +469,9 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <script>
+    let token = window.localStorage.getItem("expense_tracker_app_session")
+    token = JSON.parse(token);
+    token = token.apitoken
     // Function to fetch all expense data
     const fetchExpenseData = async () => {
       try {
@@ -476,7 +479,8 @@
           method: 'get',
           url: 'http://localhost/expense_tracker_laravel/public/api/listing',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
           }
         });
   
