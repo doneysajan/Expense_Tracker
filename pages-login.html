@@ -185,7 +185,7 @@ const loginUser = async (event) => {
 
             var userDetails = {
               'fullname' : response.data.fullname,
-              'apitoken': response.API_Token 
+              'apitoken': response.data.API_Token 
             };
             console.log(userDetails);
             window.localStorage.setItem('expense_tracker_app_session', JSON.stringify(userDetails));

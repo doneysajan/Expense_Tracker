@@ -467,12 +467,17 @@
   expenseForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     const formData = new FormData(expenseForm);
-
+    let token = window.localStorage.getItem("expense_tracker_app_session")
+    token = JSON.parse(token);
+    token = token.apitoken
     try {
       const response = await axios({
         method: 'post',
         url:'http://localhost/expense_tracker_laravel/public/api/store',
         data: formData,
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
       });
       console.log(response.data);
       if (response.data.success) {
