@@ -212,13 +212,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6 id="fname">Kevin Anderson</h6>
+              <!-- <span>Web Designer</span> -->
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -255,7 +255,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -327,6 +327,73 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
+    <div class="filters">
+      <div class="filter-group">
+        <label for="date-filter" style="font-size: 18px;">From</label>
+        <input type="date" id="date-filter-start" name="date-filter-start" style="font-size: 16px; padding: 8px;">
+       
+        <label for="date-filter" style="font-size: 18px;">To</label>
+        
+        <input type="date" id="date-filter-end" name="date-filter-end" style="font-size: 16px; padding: 8px;">
+      </div>
+    
+      <div class="filter-group">
+        <label for="category-filter" style="font-size: 18px;">Category:</label>
+        <select id="category-filter" name="category-filter" style="font-size: 16px; padding: 8px;">
+          <option value="all">All Categories</option>
+          <option value="food">Food</option>
+          <option value="travel">Travel</option>
+          <option value="rent">Rent</option>
+          <option value="electricity">Electricity</option>
+          <option value="fuel">Fuel</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+    
+      <!-- Add a class to the apply button for styling -->
+      <button class="apply-button" onclick="applyFilters()" style="font-size: 18px; padding: 10px 16px;">
+        Apply Filters
+      </button>
+    </div>
+    
+    <style>
+      .filters {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px; /* Increased margin for additional space */
+      }
+    
+      .filter-group {
+        display: flex;
+        align-items: center;
+        margin-right: 20px; /* Increased margin for additional space */
+      }
+    
+      .filter-group label {
+        margin-right: 10px;
+      }
+    
+      /* Adjust space between the two date inputs */
+      #date-filter-start,
+      #date-filter-end,
+      #category-filter {
+        margin-right: 20px; /* Adjusted margin for additional space */
+      }
+    
+      /* Adjust space between button and filter groups */
+      .apply-button {
+        margin-top: 0;
+        margin-right: 200px; /* Increased margin for additional space */
+        padding: 10px 20px; /* Adjusted padding for a better button appearance */
+        background-color: blue; /* Change button color */
+        color: #fff; /* Set text color to white */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+    
 
     <section class="section">
       <div class="row">
@@ -411,6 +478,16 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/session.js"></script>
+<!-- ... your existing HTML ... -->
+
+<script>
+  // Set the max attribute of the date inputs to today
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("date-filter-start").setAttribute("max", today);
+  document.getElementById("date-filter-end").setAttribute("max", today);
+</script>
+
 
 </body>
 

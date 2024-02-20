@@ -454,7 +454,7 @@
     var today = new Date().toISOString().split('T')[0];
     document.getElementById("date").setAttribute("max", today);
     document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('maincategory').addEventListener('change', function () {
+    document.getElementById('maincategory').addEventListener('change', function () {
     var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
     if (this.value === 'Others') {
       othersTextBoxContainer.style.display = 'flex';
