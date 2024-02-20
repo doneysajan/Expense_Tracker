@@ -187,7 +187,7 @@ const loginUser = async (event) => {
             console.log(userDetails);
             window.localStorage.setItem('expense_tracker_app_session', JSON.stringify(userDetails));
             // Redirect to the home page or any other authorized page
-            // window.location.href = 'http://localhost/Expense_Tracker/index.html';
+            window.location.href = 'http://localhost/Expense_Tracker/index.html';
         } else {
             alert(response.data.message || "Login failed. Please check your credentials.");
         }

@@ -328,6 +328,55 @@
       </nav>
     </div><!-- End Page Title -->
 
+    <div class="filters">
+      <div class="filter-group">
+        <label for="date-filter">Date:</label>
+        <input type="date" id="date-filter-start" name="date-filter-start">
+
+        to
+        <input type="date" id="date-filter-end" name="date-filter-end">
+      </div>
+    
+      <div class="filter-group">
+        <label for="category-filter">Category:</label>
+        <select id="category-filter" name="category-filter">
+          <option value="all">All Categories</option>
+          <option value="food">Food</option>
+          <option value="travel">Travel</option>
+          <option value="travel">Rent</option>
+          <option value="travel">Electricity</option>
+          <option value="travel">Fuel</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+    
+      <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+    
+    <style>
+      .filters {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px; /* Add margin-bottom for additional space if needed */
+      }
+    
+      .filter-group {
+        display: flex;
+        align-items: center;
+        margin-right: 10px; /* Adjust as needed for the space between filter groups */
+      }
+    
+      .filter-group label {
+        margin-right: 10px; /* Adjust as needed for the space between label and input/select */
+      }
+    
+      button {
+        margin-top: 0; /* Adjust as needed to reduce space between button and filter groups */
+      }
+    </style>
+    
+
+
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -411,6 +460,15 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+<!-- ... your existing HTML ... -->
+
+<script>
+  // Set the max attribute of the date inputs to today
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("date-filter-start").setAttribute("max", today);
+  document.getElementById("date-filter-end").setAttribute("max", today);
+</script>
+
 
 </body>
 
