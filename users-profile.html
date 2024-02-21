@@ -214,12 +214,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6 id="fname">Kevin Anderson</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -388,49 +388,33 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8" id="nme">Kevin Anderson</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8" id="eml">k.anderson@example.com</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8" id="phn">(436) 486-3538 x29071</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                    <div class="col-lg-9 col-md-8" id="add">A108 Adam Street, New York, NY 535022</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Currency</div>
-                    <div class="col-lg-9 col-md-8">INR</div>
+                    <div class="col-lg-9 col-md-8" id="crn">INR</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Monthly Budget</div>
-                    <div class="col-lg-9 col-md-8">25000</div>
+                    <div class="col-lg-9 col-md-8" id="bgt">25000</div>
                   </div>
-
-                 
-                  <!-- <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Company</div>
-                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">Web Designer</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">USA</div>
-                  </div> -->
 
                 </div>
 
@@ -459,13 +443,6 @@
                       </div>
                     </div>
 
-                    <!-- <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                      </div>
-                    </div> -->
-
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
@@ -490,13 +467,13 @@
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Currency</label>
                       <div class="col-md-8 col-lg-9">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" id="Currency">
                           <option selected>Select</option>
-                          <option value="1">INR</option>
-                          <option value="2">Dollar</option>
-                          <option value="3">Euro</option>
-                          <option value="4">Pound</option>
-                          <option value="5">Dinar</option>
+                          <option value="INR">INR</option>
+                          <option value="Dollar">Dollar</option>
+                          <option value="Euro">Euro</option>
+                          <option value="Pound">Pound</option>
+                          <option value="Dinar">Dinar</option>
                         </select>
                       </div>
                     </div>
@@ -504,47 +481,13 @@
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Monthly Budget</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="number" class="form-control">
+                        <input type="number" class="form-control" id="MonthlyBudget">
                       </div>
                     </div>
 
-                    <!-- <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div> -->
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button id="saveChangesButton" type="button" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
@@ -652,6 +595,93 @@
     <!-- </div> -->
   </footer><!-- End Footer -->
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    let token = window.localStorage.getItem("expense_tracker_app_session");
+    token = JSON.parse(token);
+    token = token.apitoken;
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost/expense_tracker_laravel/public/api/getUser',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(response.data);
+        if (response.data) 
+        {
+          document.getElementById('fullName').value = response.data.fullname;
+          document.getElementById('Email').value = response.data.email;
+          document.getElementById('Phone').value = response.data.phone;
+          document.getElementById('Address').value = response.data.address;
+          document.getElementById('Currency').value = response.data.currency;
+          document.getElementById('MonthlyBudget').value = response.data.budget;
+          document.getElementById('nme').innerText = response.data.fullname;
+          document.getElementById('eml').innerText = response.data.email;
+          document.getElementById('phn').innerText = response.data.phone;
+          document.getElementById('add').innerText = response.data.address;
+          document.getElementById('crn').innerText = response.data.currency;
+          document.getElementById('bgt').innerText = response.data.budget;
+        } 
+        else 
+        {
+        alert("Failed to fetch user data. Please try again.");
+        }
+      } 
+      catch (error) 
+      {
+      console.error('Error fetching user data:', error);
+      alert("An error occurred while fetching user data. Please try again.");
+    }
+  }
+  window.onload = () => {
+      fetchUserData();
+    }
+
+    const saveChangesButton = document.getElementById('saveChangesButton');
+  saveChangesButton.addEventListener('click', async () => {
+    try {
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('Email').value;
+      const phone = document.getElementById('Phone').value;
+      const address = document.getElementById('Address').value;
+      const currency = document.getElementById('Currency').value;
+      const monthlybudget = document.getElementById('MonthlyBudget').value;
+
+      const response = await axios({
+        method: 'post', // Assuming you are using a PUT request to update the user's profile
+        url: 'http://localhost/expense_tracker_laravel/public/api/updateUser',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        data: {
+          fullName,
+          email,
+          phone,
+          address,
+          currency,
+          monthlybudget
+        }
+      });
+
+      if (response.status === 200) {
+        alert('Profile updated successfully');
+        // Optionally, you can update the UI to reflect the changes
+      } else {
+        alert('Failed to update profile. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('An error occurred while updating profile. Please try again.');
+    }
+  });
+  </script>
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
@@ -663,7 +693,7 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
+  <script src="assets/js/session.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   
