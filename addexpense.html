@@ -269,7 +269,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html" id="signOutLink">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -450,48 +450,54 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    // Set the max attribute of the date input to today
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementById("date").setAttribute("max", today);
-    document.addEventListener('DOMContentLoaded', function () {
+  // Set the max attribute of the date input to today
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("date").setAttribute("max", today);
+
+  document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('maincategory').addEventListener('change', function () {
-    var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
-    if (this.value === 'Others') {
-      othersTextBoxContainer.style.display = 'flex';
-    } else {
-      othersTextBoxContainer.style.display = 'none';
-    }
-  });
+      var othersTextBoxContainer = document.getElementById('othersTextBoxContainer');
+      if (this.value === 'Others') {
+        othersTextBoxContainer.style.display = 'flex';
+      } else {
+        othersTextBoxContainer.style.display = 'none';
+      }
+    });
 
-  const expenseForm = document.getElementById('expenseForm');
-  expenseForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const formData = new FormData(expenseForm);
-    let token = window.localStorage.getItem("expense_tracker_app_session")
-    token = JSON.parse(token);
-    token = token.apitoken
-    try {
-      const response = await axios({
-        method: 'post',
-        url:'http://localhost/expense_tracker_laravel/public/api/store',
-        data: formData,
-        headers:{
-          Authorization: `Bearer ${token}`
+    const expenseForm = document.getElementById('expenseForm');
+    expenseForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const formData = new FormData(expenseForm);
+      let token = window.localStorage.getItem("expense_tracker_app_session")
+      token = JSON.parse(token);
+      token = token.apitoken
+      try {
+        const response = await axios({
+          method: 'post',
+          url:'http://localhost/expense_tracker_laravel/public/api/store',
+          data: formData,
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(response.data);
+        if (response.data.success) {
+          alert("Expense added successfully!");
+          expenseForm.reset();
+        } else {
+          alert(response.data.message || "Unable to add Expenses");
         }
-      });
-      console.log(response.data);
-      if (response.data.success) {
-            alert("Expense added successfully!");
-            } else {
-              alert(response.data.message || "Uable to add Expenses");
-            }
-    } catch (error) {
-      console.error(error);
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+    document.getElementById('signOutLink').addEventListener('click', function ()
+     {
+      window.localStorage.removeItem("expense_tracker_app_session");
+    });
   });
-});
-
 </script>
+
   
   <!-- End #main -->
 
