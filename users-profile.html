@@ -28,14 +28,8 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="assets/js/session.js"></script>
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Jan 09 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -284,7 +278,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item" style="margin-bottom: 20px;">
-        <a class="nav-link" href="addexpense.html">
+        <a class="nav-link collapsed" href="addexpense.html">
           <i class="bi bi-menu-button-wide"></i><span>Add Expense</span>
         </a>
         </li>  
@@ -341,7 +335,7 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
+              <h2 id="names">Kevin Anderson</h2>
               <!-- <h3>Web Designer</h3> -->
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -488,7 +482,12 @@
 
                     <div class="text-center">
                       <button id="saveChangesButton" type="button" class="btn btn-primary">Save Changes</button>
+                    </div>&nbsp; &nbsp;
+
+                    <div class="text-center">
+                      <button id="deactivateButton" type="button" class="btn btn-danger">Deactivate Account</button>
                     </div>
+
                   </form><!-- End Profile Edit Form -->
 
                 </div>
@@ -563,7 +562,8 @@
                     </div>
                 
                     <div class="text-center">
-                      <button type="button" class="btn btn-primary" onclick="validatePassword()">Change Password</button>
+                      <!-- <button type="button" class="btn btn-primary" onclick="validatePassword()">Change Password</button> -->
+                      <button id="changePasswordButton" type="submit" class="btn btn-primary">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -583,16 +583,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    <!-- <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div> -->
-    <!-- <div class="credits"> -->
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-    <!-- </div> -->
+   
   </footer><!-- End Footer -->
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -643,7 +634,7 @@
     }
 
     const saveChangesButton = document.getElementById('saveChangesButton');
-  saveChangesButton.addEventListener('click', async () => {
+    saveChangesButton.addEventListener('click', async () => {
     try {
       const fullName = document.getElementById('fullName').value;
       const email = document.getElementById('Email').value;
@@ -671,8 +662,14 @@
 
       if (response.status === 200) {
         alert('Profile updated successfully');
-        // Optionally, you can update the UI to reflect the changes
-      } else {
+        document.getElementById('nme').innerText = fullName;
+        document.getElementById('eml').innerText = email;
+        document.getElementById('phn').innerText = phone;
+        document.getElementById('add').innerText = address;
+        document.getElementById('crn').innerText = currency;
+        document.getElementById('bgt').innerText = monthlybudget;
+      } 
+      else {
         alert('Failed to update profile. Please try again.');
       }
     } catch (error) {
@@ -680,6 +677,74 @@
       alert('An error occurred while updating profile. Please try again.');
     }
   });
+
+  //Change password
+  const changePasswordButton = document.getElementById('changePasswordButton');
+  changePasswordButton.addEventListener('click', async () => {
+    
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      try {
+      if (!validatePassword()) {
+        return;
+      }
+
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost/expense_tracker_laravel/public/api/changePassword',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        data: {
+          currentPassword,
+          newPassword
+        }
+      });
+
+      if (response.status === 200) {
+        alert('Password changed successfully');
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('renewPassword').value = '';
+      } else {
+        alert('Failed to change password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      alert('An error occurred while changing password. Please try again.');
+    }
+  });
+
+  //Deactivate Account
+  const deactivateButton = document.getElementById('deactivateButton');
+  deactivateButton.addEventListener('click', async () => {
+      // Prompt a confirmation dialog
+      const confirmDeactivation = confirm("Are you sure you want to deactivate your account?");
+      if (confirmDeactivation) {
+          try {
+              const response = await axios({
+                  method: 'post',
+                  url: 'http://localhost/expense_tracker_laravel/public/api/deactivateAccount', 
+                  headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${token}`
+                  }
+              });
+
+              if (response.status === 200) {
+                  alert('Your account has been deactivated successfully');
+                  window.location.href = 'http://localhost/Expense_Tracker/pages-login.html';
+              } else {
+                  alert('Failed to deactivate account. Please try again.');
+              }
+          } catch (error) {
+              console.error('Error deactivating account:', error);
+              alert('An error occurred while deactivating your account. Please try again.');
+          }
+      }
+  });
+
   </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -696,8 +761,7 @@
   <script src="assets/js/session.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  
-  <!---**************************************************************custom*************************************************************** -->
+ 
 
   <script>
     function validatePassword() {
@@ -705,32 +769,24 @@
       var newPassword = document.getElementById('newPassword').value;
       var renewPassword = document.getElementById('renewPassword').value;
   
-      // Check if current password, new password, and re-entered password are not empty
       if (currentPassword === "" || newPassword === "" || renewPassword === "") {
         alert('All password fields are required. Please fill them out.');
         return;
       }
   
-      // Check if new password and re-entered password match
       if (newPassword !== renewPassword) {
         alert('Passwords do not match. Please re-enter the same password.');
         return;
       }
   
-      // Check if the password has at least 8 characters with a mixture of numbers and special characters
-      var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+        var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
       if (!passwordRegex.test(newPassword)) {
         alert('Password must be at least 8 characters long and contain a mixture of numbers and special characters.');
         return;
       }
-  
-      // If all validations pass, submit the form
       document.getElementById('changePasswordForm').submit();
     }
   </script>
-  
-  
 
 </body>
-
 </html>
