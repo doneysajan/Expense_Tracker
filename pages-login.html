@@ -169,7 +169,8 @@ const loginUser = async (event) => {
         });
 
         console.log(response.data);
-        if (response.data.success) {
+        if (response.data.success) 
+        {
             alert("Login successful!");
 
             // If "Remember me" is checked, set a cookie with the user's email
@@ -191,11 +192,15 @@ const loginUser = async (event) => {
             window.localStorage.setItem('expense_tracker_app_session', JSON.stringify(userDetails));
             // Redirect to the home page or any other authorized page
           window.location.href = 'http://localhost/Expense_Tracker/index.html';
-        } else {
+        } 
+        else 
+        {
             alert(response.data.message || "Login failed. Please check your credentials.");
         }
 
-    } catch (error) {
+    } 
+    catch (error) 
+    {
         console.error('Error submitting the form:', error);
         alert("An error occurred while processing your request. Please try again.");
     }

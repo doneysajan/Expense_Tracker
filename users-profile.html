@@ -536,36 +536,32 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form id="changePasswordForm">
-                
+                  <form id="changePasswordForm" method="POST">
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword"required>
-                      </div>
-                    </div>
-                  
-                    
-                
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword" required>
-                      </div>
+                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="password" type="password" class="form-control" id="currentPassword" required>
+                        </div>
                     </div>
                 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword" required>
-                      </div>
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="newpassword" type="password" class="form-control" id="newPassword" required>
+                        </div>
+                    </div>
+                
+                    <div class="row mb-3">
+                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" required>
+                        </div>
                     </div>
                 
                     <div class="text-center">
-                      <!-- <button type="button" class="btn btn-primary" onclick="validatePassword()">Change Password</button> -->
-                      <button id="changePasswordButton" type="submit" class="btn btn-primary">Change Password</button>
+                        <button id="changePasswordButton" type="submit" class="btn btn-primary">Change Password</button>
                     </div>
-                  </form><!-- End Change Password Form -->
+                </form><!-- End Change Password Form -->
 
                 </div>
 
@@ -679,42 +675,65 @@
   });
 
   //Change password
-  const changePasswordButton = document.getElementById('changePasswordButton');
-  changePasswordButton.addEventListener('click', async () => {
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  changePasswordForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); 
     
-      const currentPassword = document.getElementById('currentPassword').value;
-      const newPassword = document.getElementById('newPassword').value;
-      try {
-      if (!validatePassword()) {
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const renewPassword = document.getElementById('renewPassword').value;
+
+    if (!validatePassword(currentPassword, newPassword, renewPassword)) {
         return;
-      }
+    }
 
-      const response = await axios({
-        method: 'post',
-        url: 'http://localhost/expense_tracker_laravel/public/api/changePassword',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        data: {
-          currentPassword,
-          newPassword
+    try {
+        const response = await axios({
+            method: 'post',
+            url: 'http://localhost/expense_tracker_laravel/public/api/changePassword',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            data: {
+                currentPassword,
+                newPassword
+            }
+        });
+
+        if (response.status === 200) {
+            alert('Password changed successfully');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('renewPassword').value = '';
+        } else {
+            alert('Failed to change password. Please try again.');
         }
-      });
-
-      if (response.status === 200) {
-        alert('Password changed successfully');
-        document.getElementById('currentPassword').value = '';
-        document.getElementById('newPassword').value = '';
-        document.getElementById('renewPassword').value = '';
-      } else {
-        alert('Failed to change password. Please try again.');
-      }
     } catch (error) {
-      console.error('Error changing password:', error);
-      alert('An error occurred while changing password. Please try again.');
+        console.error('Error changing password:', error);
+        alert('An error occurred while changing password. Please try again.');
     }
   });
+
+  function validatePassword(currentPassword, newPassword, renewPassword) {
+    if (currentPassword === "" || newPassword === "" || renewPassword === "") {
+        alert('All password fields are required. Please fill them out.');
+        return false;
+    }
+
+    if (newPassword !== renewPassword) {
+        alert('Passwords do not match. Please re-enter the same password.');
+        return false;
+    }
+
+    var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+        alert('Password must be at least 8 characters long and contain a mixture of numbers and special characters.');
+        return false;
+    }
+    return true; 
+  }
+
 
   //Deactivate Account
   const deactivateButton = document.getElementById('deactivateButton');
@@ -761,32 +780,6 @@
   <script src="assets/js/session.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
- 
-
-  <script>
-    function validatePassword() {
-      var currentPassword = document.getElementById('currentPassword').value;
-      var newPassword = document.getElementById('newPassword').value;
-      var renewPassword = document.getElementById('renewPassword').value;
-  
-      if (currentPassword === "" || newPassword === "" || renewPassword === "") {
-        alert('All password fields are required. Please fill them out.');
-        return;
-      }
-  
-      if (newPassword !== renewPassword) {
-        alert('Passwords do not match. Please re-enter the same password.');
-        return;
-      }
-  
-        var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-      if (!passwordRegex.test(newPassword)) {
-        alert('Password must be at least 8 characters long and contain a mixture of numbers and special characters.');
-        return;
-      }
-      document.getElementById('changePasswordForm').submit();
-    }
-  </script>
 
 </body>
 </html>
