@@ -329,14 +329,14 @@
     </div><!-- End Page Title -->
 
     <div class="filters">
-      <div class="filter-group">
+      <!-- <div class="filter-group">
         <label for="date-filter" style="font-size: 18px;">From</label>
         <input type="date" id="date-filter-start" name="date-filter-start" style="font-size: 16px; padding: 8px;">
        
         <label for="date-filter" style="font-size: 18px;">To</label>
         
         <input type="date" id="date-filter-end" name="date-filter-end" style="font-size: 16px; padding: 8px;">
-      </div>
+      </div> -->
     
       <div class="filter-group">
         <label for="category-filter" style="font-size: 18px;">Category:</label>
@@ -352,7 +352,7 @@
       </div>
     
       <!-- Add a class to the apply button for styling -->
-      <button class="apply-button" onclick="applyFilters()" style="font-size: 18px; padding: 10px 16px;">
+      <button class="apply-button" id="applyfilter" >
         Apply Filters
       </button>
     </div>
@@ -401,20 +401,18 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+              <!-- <h5 class="card-title">Datatables</h5>
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p> -->
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th>
-                      <b>N</b>ame
-                    </th>
-                    <th>Ext.</th>
-                    <th>City</th>
-                    <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
-                    <th>Completion</th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Maincategory</th>
+                    <th>Merchantname</th>
+                    <th>Amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -466,6 +464,79 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+
+  <!-- Include Axios library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    let token = window.localStorage.getItem("expense_tracker_app_session");
+    token = JSON.parse(token);
+    token = token.apitoken;
+
+    const applyFilterButton = document.getElementById('applyfilter');
+    applyFilterButton.addEventListener('click', () => {
+      // Get the selected category from the dropdown
+      const selectedCategory = document.getElementById("category-filter").value;
+
+      // Fetch filtered expense data based on the selected category
+      fetchFilteredExpenseData(selectedCategory);
+    });
+
+    // Function to fetch expense data based on category
+    const fetchFilteredExpenseData = async (selectedCategory) => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost/expense_tracker_laravel/public/api/getFilteredExpenseData',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          params: {
+            category: selectedCategory
+            // Add more params if needed
+          }
+        });
+
+        console.log(response.data);
+        if (response.data) {
+          // Handle successful response, update the UI with filtered expense data
+          updateExpenseUI(response.data);
+        } else {
+          alert("Failed to fetch expense data. Please try again.");
+        }
+
+      } catch (error) {
+        console.error('Error fetching expense data:', error);
+        alert("An error occurred while fetching expense data. Please try again.");
+      }
+    }
+
+    // Function to update the UI with expense data
+    const updateExpenseUI = (expenseData) => {
+      // Clear existing table data
+      const tableBody = document.querySelector('.table.datatable tbody');
+      tableBody.innerHTML = '';
+
+      // Iterate through expense data and append rows to the table
+      expenseData.forEach((expense) => {
+        const row = tableBody.insertRow();
+        const idCell = row.insertCell(0);
+        const dateCell = row.insertCell(1);
+        const maincategoryCell = row.insertCell(2);
+        const merchantnameCell = row.insertCell(3);
+        const amountCell = row.insertCell(4);
+
+        idCell.textContent = expense.id;
+        dateCell.textContent = expense.date;
+        maincategoryCell.textContent = expense.maincategory;
+        merchantnameCell.textContent = expense.merchantname;
+        amountCell.textContent = expense.amount;
+      });
+    }
+  </script>
+
+
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -480,13 +551,6 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/session.js"></script>
 <!-- ... your existing HTML ... -->
-
-<script>
-  // Set the max attribute of the date inputs to today
-  var today = new Date().toISOString().split('T')[0];
-  document.getElementById("date-filter-start").setAttribute("max", today);
-  document.getElementById("date-filter-end").setAttribute("max", today);
-</script>
 
 
 </body>
