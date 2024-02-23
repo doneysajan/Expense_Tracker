@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <script src="assets/js/session.js"></script>
+  
 
 </head>
 
@@ -207,7 +207,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+            <img id="profilepic" src="" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -418,7 +418,7 @@
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="uploads/profile/.jpg" name="profileimg" alt="Profile">
+                        <img src="" name="profileimg" alt="Profile">
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click();">
                             <i class="bi bi-upload"></i>
@@ -583,10 +583,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    
     let token = window.localStorage.getItem("expense_tracker_app_session");
     token = JSON.parse(token);
     token = token.apitoken;
-
+    
     const fetchUserData = async () => {
       try {
         const response = await axios({
@@ -681,6 +682,38 @@
       alert('An error occurred while updating profile. Please try again.');
     }
   });
+
+
+  //remove profile pic
+  document.addEventListener('DOMContentLoaded', () => {
+            const removeProfileImageButton = document.querySelector('.btn-remove-profile');
+            removeProfileImageButton.addEventListener('click', async () => {
+                try {
+                    // Send a request to remove the profile image from the database
+                    const response = await axios({
+                        method: 'post',
+                        url: 'http://localhost/expense_tracker_laravel/public/api/removeProfileImage',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+
+                    // Handle the response
+                    if (response.status === 200) {
+                        alert('Profile image removed successfully');
+                        // Optionally, update the UI to reflect the removal of the profile image
+                        // For example, you can hide the profile image element or set its source to a default image
+                        document.getElementById('profilepic').src = 'path_to_default_image.jpg';
+                    } else {
+                        alert('Failed to remove profile image. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error removing profile image:', error);
+                    alert('An error occurred while removing profile image. Please try again.');
+                }
+            });
+        });
 
   //Change password
   const changePasswordForm = document.getElementById('changePasswordForm');

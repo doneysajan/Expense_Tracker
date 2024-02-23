@@ -183,10 +183,10 @@ const loginUser = async (event) => {
                 setCookie('rememberedPassword', '', -1);
             }
 
-
             var userDetails = {
               'fullname' : response.data.fullname,
-              'apitoken': response.data.API_Token 
+              'apitoken': response.data.API_Token,
+              'profileImgUrl': response.data.profileImgUrl
             };
             console.log(userDetails);
             window.localStorage.setItem('expense_tracker_app_session', JSON.stringify(userDetails));
