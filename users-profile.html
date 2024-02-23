@@ -207,14 +207,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
             <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6 id="fname">Kevin Anderson</h6>
-              <span>Web Designer</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -329,14 +328,14 @@
 
     <section class="section profile">
       <div class="row">
-        <div class="col-xl-4">
+        <!-- <div class="col-xl-4">
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="assets/img/profile-img.jpg" name="profileimgs" alt="Profile" class="rounded-circle">
               <h2 id="names">Kevin Anderson</h2>
-              <!-- <h3>Web Designer</h3> -->
+             
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -346,7 +345,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
         <div class="col-xl-8">
 
@@ -415,16 +414,16 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
+                        <img src="uploads/profile/.jpg" name="profileimg" alt="Profile">
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click();">
                             <i class="bi bi-upload"></i>
                         </a>
-                        <input type="file" id="fileInput" style="display:none;">
+                        <input type="file" id="fileInput" name="profile" style="display:none;">
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
@@ -613,7 +612,13 @@
           document.getElementById('add').innerText = response.data.address;
           document.getElementById('crn').innerText = response.data.currency;
           document.getElementById('bgt').innerText = response.data.budget;
+          
+          if (response.data.profile) {
+          const profileImageUrl = `http://localhost/expense_tracker_laravel/public/uploads/profile/${response.data.profile}`;
+          document.querySelector('img[name="profileimg"]').src = profileImageUrl;
+        }
         } 
+        
         else 
         {
         alert("Failed to fetch user data. Please try again.");
@@ -629,6 +634,7 @@
       fetchUserData();
     }
 
+    //Update User
     const saveChangesButton = document.getElementById('saveChangesButton');
     saveChangesButton.addEventListener('click', async () => {
     try {
@@ -638,12 +644,13 @@
       const address = document.getElementById('Address').value;
       const currency = document.getElementById('Currency').value;
       const monthlybudget = document.getElementById('MonthlyBudget').value;
+      const profile = document.getElementById('fileInput').files[0];
 
       const response = await axios({
         method: 'post', // Assuming you are using a PUT request to update the user's profile
         url: 'http://localhost/expense_tracker_laravel/public/api/updateUser',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         },
         data: {
@@ -652,7 +659,8 @@
           phone,
           address,
           currency,
-          monthlybudget
+          monthlybudget,
+          profile
         }
       });
 
@@ -707,7 +715,7 @@
             document.getElementById('newPassword').value = '';
             document.getElementById('renewPassword').value = '';
         } else {
-            alert('Failed to change password. Please try again.');
+            alert('Failed to change password. Please try again.'); 
         }
     } catch (error) {
         console.error('Error changing password:', error);
