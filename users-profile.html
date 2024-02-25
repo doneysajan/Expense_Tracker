@@ -250,7 +250,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html" id="signOutLink">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -804,7 +804,10 @@
           }
       }
   });
-
+  document.getElementById('signOutLink').addEventListener('click', function ()
+     {
+      window.localStorage.removeItem("expense_tracker_app_session");
+    });
   </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
