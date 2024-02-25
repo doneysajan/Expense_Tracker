@@ -211,7 +211,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img id="profilepic" src="" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -255,7 +255,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html" id="signOutLink">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -534,6 +534,10 @@
         amountCell.textContent = expense.amount;
       });
     }
+    document.getElementById('signOutLink').addEventListener('click', function ()
+     {
+      window.localStorage.removeItem("expense_tracker_app_session");
+    });
   </script>
 
 
