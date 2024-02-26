@@ -340,29 +340,56 @@
               <!-- Line Chart -->
               <canvas id="lineChart" style="max-height: 400px;"></canvas>
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#lineChart'), {
-                    type: 'line',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                        label: 'Line Chart',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
+                document.addEventListener("DOMContentLoaded", async () => {
+                  let token = window.localStorage.getItem("expense_tracker_app_session");
+                  if (token) {
+                    token = JSON.parse(token).apitoken;
+              
+                    try {
+                      const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost/expense_tracker_laravel/public/api/graph',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`
                         }
-                      }
+                      });
+              
+                    
+                      const categories = response.data.map(item => item.maincategory);
+                      const amounts = response.data.map(item => parseFloat(item.total_amount));
+              
+                      const ctx = document.getElementById('lineChart').getContext('2d');
+                      const lineChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                          labels: categories, // Dynamically set from API
+                          datasets: [{
+                            label: 'Expense Over Time',
+                            data: amounts, // Dynamically set from API
+                            fill: false,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    } catch (error) {
+                      console.error('Error fetching data:', error.response || error);
+                      alert("An error occurred while fetching data. Please try again.");
                     }
-                  });
+                  } else {
+                    alert("No session token found. Please login again.");
+                  }
                 });
               </script>
+              
               <!-- End Line CHart -->
 
             </div>
@@ -376,47 +403,61 @@
 
               <!-- Bar Chart -->
               <canvas id="barChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#barChart'), {
-                    type: 'bar',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                        label: 'Bar Chart',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
-                });
-              </script>
+              <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    let token = window.localStorage.getItem("expense_tracker_app_session");
+    if (token) {
+      token = JSON.parse(token).apitoken;
+
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost/expense_tracker_laravel/public/api/graph',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const categories = response.data.map(item => item.maincategory);
+        const amounts = response.data.map(item => parseFloat(item.total_amount));
+
+        const ctx = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: categories,
+            datasets: [{
+              label: 'Expense by Category',
+              data: amounts,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching expense data:', error);
+        alert("An error occurred while fetching expense data. Please try again.");
+      }
+    } else {
+      alert("No session token found. Please login again.");
+    }
+  });
+</script>    
               <!-- End Bar CHart -->
+
+
+
 
             </div>
           </div>
@@ -427,32 +468,62 @@
             <div class="card-body">
               <h5 class="card-title">Pie Chart</h5>
 
+
+
+
               <!-- Pie Chart -->
               <canvas id="pieChart" style="max-height: 400px;"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#pieChart'), {
-                    type: 'pie',
-                    data: {
-                      labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                      ],
-                      datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(54, 162, 235)',
-                          'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                      }]
+                document.addEventListener("DOMContentLoaded", async () => {
+                  let token = window.localStorage.getItem("expense_tracker_app_session");
+                  if (token) {
+                    token = JSON.parse(token).apitoken;
+                    try {
+                      const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost/expense_tracker_laravel/public/api/graph',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`
+                        }
+                      });
+              
+                      const categories = response.data.map(item => item.maincategory);
+                      const amounts = response.data.map(item => parseFloat(item.total_amount));
+              
+                      const ctx = document.getElementById('pieChart').getContext('2d');
+                      const pieChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                          labels: categories,
+                          datasets: [{
+                            data: amounts,
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)',
+                              'rgb(225, 0, 255)',
+                              'rgb(143, 0, 255)',
+                            ],
+                            hoverOffset: 4
+                          }]
+                        }
+                      });
+                      console.log('Chart should be updated now');
+                    } catch (error) {
+                      console.error('Error fetching expense data:', error.response || error);
+                      if (!response || error.response.status !== 200) {
+                        alert("An error occurred while fetching expense data. Please try again.");
+                      }
                     }
-                  });
+                  } else {
+                    alert("No session token found. Please login again.");
+                  }
                 });
               </script>
+
               <!-- End Pie CHart -->
 
             </div>
@@ -464,32 +535,59 @@
             <div class="card-body">
               <h5 class="card-title">Doughnut Chart</h5>
 
+
+
               <!-- Doughnut Chart -->
               <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#doughnutChart'), {
-                    type: 'doughnut',
-                    data: {
-                      labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                      ],
-                      datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(54, 162, 235)',
-                          'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                      }]
-                    }
-                  });
-                });
-              </script>
+              <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    let token = window.localStorage.getItem("expense_tracker_app_session");
+    if (token) {
+      token = JSON.parse(token).apitoken;
+
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost/expense_tracker_laravel/public/api/graph',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const categories = response.data.map(item => item.maincategory);
+        const amounts = response.data.map(item => parseFloat(item.total_amount));
+
+        const ctx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: categories,
+            datasets: [{
+              data: amounts,
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(225, 0, 255)',
+                'rgb(143, 0, 255)',
+              ],
+              hoverOffset: 4
+            }]
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching expense data:', error.response || error);
+        alert("An error occurred while fetching expense data. Please try again.");
+      }
+    } else {
+      alert("No session token found. Please login again.");
+    }
+  });
+</script>
+
               <!-- End Doughnut CHart -->
 
             </div>
