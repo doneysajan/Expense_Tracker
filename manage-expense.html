@@ -359,17 +359,18 @@
 
     <div class="filters" style="text-align: center;">
       <div class="filter-group">
-        <label for="sort-filter" style="font-size: 18px;" id="sortname">Sort By</label>
-        <select id="sort-filter" name="sort-filter" style="font-size: 16px; padding: 8px;">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+          <label for="sort-filter" style="font-size: 18px; display: inline-block; margin-bottom: 0;">Sort By Amount</label>
+          <select id="sort-filter" name="sort-filter" style="font-size: 16px; padding: 8px;">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+          </select>
       </div>
-    
+  
       <button class="sort-button" id="sortfilter">
-        Sort
+          Sort
       </button>
     </div>
+  
     
     
     <style>
@@ -548,14 +549,14 @@
 
     const sortButton = document.getElementById('sortfilter');
     sortButton.addEventListener('click', () => {
-    // Get the selected sort option
+    // Get the selected sort option (ascending or descending)
     const selectedSortOption = document.getElementById('sort-filter').value;
 
-    // Fetch sorted expense data based on the selected option
+    // Fetch sorted expense data based on the selected option (by amount)
     fetchSortedExpenseData(selectedSortOption);
 });
 
-// Function to fetch sorted expense data
+// Function to fetch sorted expense data by amount
 const fetchSortedExpenseData = async (selectedSortOption) => {
     try {
         const response = await axios({
@@ -571,15 +572,10 @@ const fetchSortedExpenseData = async (selectedSortOption) => {
         });
 
         console.log(response.data);
-        if (response.data) {
-            // Handle successful response, update the UI with sorted expense data
-            updateExpenseUI(response.data);
-        } else {
-            alert("Failed to fetch sorted expense data. Please try again.");
-        }
+        updateExpenseUI(response.data);
     } catch (error) {
         console.error('Error fetching sorted expense data:', error);
-        alert("An error occurred while fetching sorted expense data. Please try again.");
+        alert(`Error fetching sorted expense data: ${error.message}`);
     }
 };
 
