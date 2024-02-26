@@ -341,53 +341,52 @@
               <canvas id="lineChart" style="max-height: 400px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", async () => {
-                  let token = window.localStorage.getItem("expense_tracker_app_session");
-                  if (token) {
-                    token = JSON.parse(token).apitoken;
-              
-                    try {
-                      const response = await axios({
-                        method: 'get',
-                        url: 'http://localhost/expense_tracker_laravel/public/api/graph',
-                        headers: {
-                          'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${token}`
-                        }
-                      });
-              
-                    
-                      const categories = response.data.map(item => item.maincategory);
-                      const amounts = response.data.map(item => parseFloat(item.total_amount));
-              
-                      const ctx = document.getElementById('lineChart').getContext('2d');
-                      const lineChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                          labels: categories, // Dynamically set from API
-                          datasets: [{
-                            label: 'Expense Over Time',
-                            data: amounts, // Dynamically set from API
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                          }]
-                        },
-                        options: {
-                          scales: {
-                            y: {
-                              beginAtZero: true
-                            }
+                let token = window.localStorage.getItem("expense_tracker_app_session");
+                if (token) {
+                  token = JSON.parse(token).apitoken;
+
+                  try {
+                    const response = await axios({
+                      method: 'get',
+                      url: 'http://localhost/expense_tracker_laravel/public/api/line',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                      }
+                    });
+
+                    const categories = response.data.map(item => item.maincategory);
+                    const amounts = response.data.map(item => parseFloat(item.total_amount));
+                    const ctx = document.getElementById('lineChart').getContext('2d');
+                    const lineChart = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                        labels: categories, // Categories as labels
+                        datasets: [{
+                          label: 'Expense by Category',
+                          data: amounts, // Total amounts as data
+                          fill: false,
+                          borderColor: 'rgb(75, 192, 192)',
+                          tension: 0.1
+                        }]
+                      },
+                      options: {
+                        scales: {
+                          y: {
+                            beginAtZero: true
                           }
                         }
-                      });
-                    } catch (error) {
-                      console.error('Error fetching data:', error.response || error);
-                      alert("An error occurred while fetching data. Please try again.");
-                    }
-                  } else {
-                    alert("No session token found. Please login again.");
+                      }
+                    });
+                  } catch (error) {
+                    console.error('Error fetching data:', error.response || error);
+                    alert("An error occurred while fetching data. Please try again.");
                   }
-                });
+                } else {
+                  alert("No session token found. Please login again.");
+                }
+              });
+
               </script>
               
               <!-- End Line CHart -->
@@ -504,7 +503,7 @@
                               'rgb(255, 99, 132)',
                               'rgb(54, 162, 235)',
                               'rgb(255, 205, 86)',
-                              'rgb(225, 0, 255)',
+                              'rgb(217, 0, 255)',
                               'rgb(143, 0, 255)',
                             ],
                             hoverOffset: 4
@@ -571,7 +570,7 @@
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
                 'rgb(255, 205, 86)',
-                'rgb(225, 0, 255)',
+                'rgb(217, 0, 255)',
                 'rgb(143, 0, 255)',
               ],
               hoverOffset: 4
