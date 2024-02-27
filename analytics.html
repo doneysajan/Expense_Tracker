@@ -61,11 +61,11 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
+        <!-- <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item dropdown">
 
@@ -335,7 +335,7 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Line Chart</h5>
+              <h5 class="card-title">Line Chart - Daily Report</h5>
 
               <!-- Line Chart -->
               <canvas id="lineChart" style="max-height: 400px;"></canvas>
@@ -398,61 +398,68 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Bar CHart</h5>
+              <h5 class="card-title">Bar Chart - Monthwise Report</h5>
 
               <!-- Bar Chart -->
               <canvas id="barChart" style="max-height: 400px;"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    let token = window.localStorage.getItem("expense_tracker_app_session");
-    if (token) {
-      token = JSON.parse(token).apitoken;
-
-      try {
-        const response = await axios({
-          method: 'get',
-          url: 'http://localhost/expense_tracker_laravel/public/api/graph',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        const categories = response.data.map(item => item.maincategory);
-        const amounts = response.data.map(item => parseFloat(item.total_amount));
-
-        const ctx = document.getElementById('barChart').getContext('2d');
-        const barChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: categories,
-            datasets: [{
-              label: 'Expense by Category',
-              data: amounts,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      } catch (error) {
-        console.error('Error fetching expense data:', error);
-        alert("An error occurred while fetching expense data. Please try again.");
-      }
-    } else {
-      alert("No session token found. Please login again.");
-    }
-  });
-</script>    
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                document.addEventListener("DOMContentLoaded", async () => {
+                  let token = window.localStorage.getItem("expense_tracker_app_session");
+                  if (token) {
+                    token = JSON.parse(token).apitoken;
+                
+                    const allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    let monthlyTotals = new Array(12).fill(0); 
+                
+                    try {
+                      const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost/expense_tracker_laravel/public/api/bar', 
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`
+                        }
+                      });
+                
+                      response.data.forEach(item => {
+                        const monthIndex = parseInt(item.month) - 1;
+                        monthlyTotals[monthIndex] = parseFloat(item.total_amount);
+                      });
+                
+                      const ctx = document.getElementById('barChart').getContext('2d');
+                      const monthlyExpenseChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: allMonths, 
+                          datasets: [{
+                            label: 'Total Monthly Expenses',
+                            data: monthlyTotals,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                    } 
+                    catch (error) {
+                      console.error('Error fetching monthly expense data:', error.response || error);
+                      alert("An error occurred while fetching monthly expense data. Please try again.");
+                    }
+                  } else {
+                    alert("No session token found. Please login again.");
+                  }
+                });
+                </script>
+                 
               <!-- End Bar CHart -->
 
 
