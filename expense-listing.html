@@ -206,7 +206,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img id="profilepic" src="" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -250,7 +250,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html" id="signOutLink">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -417,8 +417,15 @@
             </div>
             <div class="mb-3">
               <label for="editCategory" class="form-label">Category</label>
-              <input type="text" class="form-control" id="editCategory" name="editCategory">
-            </div>
+              <select class="form-select" id="editCategory" name="editCategory">
+                  <option value="food">Food</option>
+                  <option value="fuel">Fuel</option>
+                  <option value="electricity">Electricity</option>
+                  <option value="rent">Rent</option>
+                  <option value="others">Others</option>
+              </select>
+          </div>
+          
             <div class="mb-3">
               <label for="editMerchant" class="form-label">Merchant</label>
               <input type="text" class="form-control" id="editMerchant" name="editMerchant">
