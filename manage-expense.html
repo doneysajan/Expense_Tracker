@@ -51,21 +51,21 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
+    </div>End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
+        <!-- <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li>End Search Icon -->
 
         <li class="nav-item dropdown">
 
@@ -327,63 +327,18 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
-    <div class="filters">
-      <div class="filter-group">
-        <label for="date-filter" style="font-size: 18px;">From</label>
-        <input type="date" id="date-filter-start" name="date-filter-start" style="font-size: 16px; padding: 8px;">
-       
-        <label for="date-filter" style="font-size: 18px;">To</label>
-        
-        <input type="date" id="date-filter-end" name="date-filter-end" style="font-size: 16px; padding: 8px;">
-      </div>
-    
-      <div class="filter-group">
-        <label for="category-filter" style="font-size: 18px;">Category:</label>
-        <select id="category-filter" name="category-filter" style="font-size: 16px; padding: 8px;">
-          <option value="all">All Categories</option>
-          <option value="food">Food</option>
-          <option value="rent">Rent</option>
-          <option value="electricity">Electricity</option>
-          <option value="fuel">Fuel</option>
-          <option value="others">Others</option>
-          <!-- Add more options as needed -->
-        </select>
-      </div>
-    
-      <!-- Add a class to the apply button for styling -->
-      <button class="apply-button" id="applyfilter" >
-        Apply Filters
-      </button>
-    </div>
-
-    <div class="filters" style="text-align: center;">
-      <div class="filter-group">
-          <label for="sort-filter" style="font-size: 18px; display: inline-block; margin-bottom: 0;">Sort By Amount</label>
-          <select id="sort-filter" name="sort-filter" style="font-size: 16px; padding: 8px;">
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-          </select>
-      </div>
-  
-      <button class="sort-button" id="sortfilter">
-          Sort
-      </button>
-    </div>
-  
-    
     
     <style>
       .filters {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px; /* Increased margin for additional space */
+        margin-bottom: 20px;
       }
     
       .filter-group {
         display: flex;
         align-items: center;
-        margin-right: 20px; /* Increased margin for additional space */
+        margin-right: 20px; 
       }
     
       .filter-group label {
@@ -394,15 +349,15 @@
       #date-filter-start,
       #date-filter-end,
       #category-filter {
-        margin-right: 20px; /* Adjusted margin for additional space */
+        margin-right: 20px; 
       }
     
       .apply-button {
         margin-top: 0;
-        margin-right: 200px; /* Increased margin for additional space */
-        padding: 10px 20px; /* Adjusted padding for a better button appearance */
-        background-color: blue; /* Change button color */
-        color: #fff; /* Set text color to white */
+        margin-right: 200px;
+        padding: 10px 20px;
+        /* background-color: blue; */
+        color: #fff; 
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -410,12 +365,12 @@
 
 .sort-button {
     margin-top: 0;
-    margin-right: 700px; /* Adjusted margin for spacing */
-    padding: 10px 20px; /* Adjusted padding for a better button appearance */
-    width: 110px; /* Set the width of the button */
-    height: 50px; /* Set the height of the button */
-    background-color: blue; /* Change button color */
-    color: #fff; /* Set text color to white */
+    margin-right: 700px; 
+    padding: 10px 20px; 
+    /* width: 100px;
+    height: 30px;  */
+    /* background-color: blue;  */
+    color: #fff; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -430,9 +385,52 @@
 
           <div class="card">
             <div class="card-body">
+              <h5 class="card-title"></h5>
               <!-- <h5 class="card-title">Datatables</h5>
               <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p> -->
 
+              <div class="filters">
+                <div class="filter-group">
+                  <label for="date-filter" style="font-size: 15px;">From</label>
+                  <input type="date" id="date-filter-start" name="date-filter-start" style="font-size: 16px; padding: 8px;">
+                 
+                  <label for="date-filter" style="font-size: 15px;">To</label>
+                  
+                  <input type="date" id="date-filter-end" name="date-filter-end" style="font-size: 16px; padding: 8px;">
+                </div>
+              
+                <div class="filter-group">
+                  <label for="category-filter" style="font-size: 15px;">Category:</label>
+                  <select id="category-filter" name="category-filter" style="font-size: 16px; padding: 8px;">
+                    <option value="all">All Categories</option>
+                    <option value="food">Food</option>
+                    <option value="rent">Rent</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="fuel">Fuel</option>
+                    <option value="others">Others</option>
+                    <!-- Add more options as needed -->
+                  </select>
+                </div>
+              
+                <!-- Add a class to the apply button for styling -->
+                <button class="btn btn-primary apply-button" id="applyfilter">
+                  Apply Filters
+                </button>
+              </div>
+          
+              <div class="filters" style="text-align: center;">
+                <div class="filter-group">
+                    <label for="sort-filter" style="font-size: 15px; display: inline-block; margin-bottom: 0;">Sort By Amount</label>
+                    <select id="sort-filter" name="sort-filter" style="font-size: 16px; padding: 8px;">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            
+                <button class="btn btn-primary sort-button" id="sortfilter">
+                    Sort
+                </button>
+              </div>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
@@ -452,20 +450,20 @@
                     <td></td>
                     <td></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                  </tr>
-                  <tr>
+                  </tr> -->
+                  <!-- <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
