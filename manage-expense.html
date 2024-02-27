@@ -512,9 +512,6 @@
       const startDate = document.getElementById("date-filter-start").value;
       const endDate = document.getElementById("date-filter-end").value;
 
-      // Check if "All Categories" is selected
-      const categoryFilterValue = selectedCategory === 'all' ? '' : selectedCategory;
-
       // Fetch filtered expense data based on the selected category
       fetchFilteredExpenseData(selectedCategory,startDate,endDate);
     });
