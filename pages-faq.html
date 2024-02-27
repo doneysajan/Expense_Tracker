@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / F.A.Q - NiceAdmin Bootstrap Template</title>
+  <title>Expense listing - Expense Tracker</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -25,6 +25,8 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+ 
+
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -46,17 +48,10 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">Expense Tracker</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -211,14 +206,14 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <img id="profilepic" src="" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2" id="fullname">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6 id="fname">Kevin Anderson</h6>
+            
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -255,7 +250,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="pages-login.html" id="signOutLink">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -270,241 +265,53 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+  <aside id="sidebar" class="sidebar" style="background-image: url('assets/img/bg.jpg');">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+        <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed" href="index.html">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed" href="addexpense.html">
+            <i class="bi bi-menu-button-wide"></i><span>Add Expense</span>
+          </a>
+        </li> 
+  
+        <!-- <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="addexpense.html">
+            <i class="bi bi-menu-button-wide"></i><span>Add Expense</span>
+          </a>
+          <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            
+          </ul> -->
+        </li><!-- End Components Nav -->
+  
+        <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed" href="manage-expense.html">
+            <i class="bi bi-journal-text"></i><span>Manage Expense</span>
+          </a>
+        </li><!-- End Forms Nav -->
+  
+        <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed" href="expense-listing.html">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Expense Listing</span>
+          </a>
+        </li><!-- End Tables Nav -->
+  
+        <li class="nav-item" style="margin-bottom: 20px;">
+          <a class="nav-link collapsed"href="analytics.html">
+            <i class="bi bi-bar-chart"></i><span>Analytics</span>
+          </a>
+        </li><!-- End Charts Nav -->
+      </ul><!-- End Icons Nav -->
+  
+    </aside><!-- End Sidebar-->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Accordion</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Badges</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-breadcrumbs.html">
-              <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-buttons.html">
-              <i class="bi bi-circle"></i><span>Buttons</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-cards.html">
-              <i class="bi bi-circle"></i><span>Cards</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-carousel.html">
-              <i class="bi bi-circle"></i><span>Carousel</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-list-group.html">
-              <i class="bi bi-circle"></i><span>List group</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-modal.html">
-              <i class="bi bi-circle"></i><span>Modal</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tabs.html">
-              <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-pagination.html">
-              <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-progress.html">
-              <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-spinners.html">
-              <i class="bi bi-circle"></i><span>Spinners</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-circle"></i><span>Tooltips</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Chart.js</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>ApexCharts</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-echarts.html">
-              <i class="bi bi-circle"></i><span>ECharts</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Charts Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Icons Nav -->
-
-      <li class="nav-heading">Pages</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link " href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li><!-- End Error 404 Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
+      <!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -528,18 +335,18 @@
               <h5 class="card-title">Basic Questions</h5>
 
               <div>
-                <h6>1. Nisi ut ut exercitationem voluptatem esse sunt rerum?</h6>
-                <p>Saepe perspiciatis ea. Incidunt blanditiis enim mollitia qui voluptates. Id rem nulla tenetur nihil in unde rerum. Quae consequatur placeat qui cumque earum eius omnis quos.</p>
+                <h6>1. What types of analytics and visualizations are available in the Expense Tracker app?</h6>
+                <p>The app provides summary statistics on total expenses for a given date range, month-over-month expense comparisons, and top spending categories. It also includes interactive charts (e.g., pie chart, line/bar chart, doughnut chart) for visualizing expenses and budget vs. actual spending.</p>
               </div>
 
               <div class="pt-2">
-                <h6>2. Reiciendis dolores repudiandae?</h6>
-                <p>Id ipsam non ut. Placeat doloremque deserunt quia tenetur inventore laboriosam dolores totam odio. Aperiam incidunt et. Totam ut quos sunt atque modi molestiae dolorem.</p>
+                <h6>2. Are there any additional features or customization options available in the Expense Tracker app?</h6>
+                <p>Yes, the app includes features such as dark mode toggle, multi-language support, responsive UI for various devices, and the ability to export expenses in PDF, Excel, or CSV format. Additionally, users can customize their profile settings and notifications preferences.</p>
               </div>
 
               <div class="pt-2">
-                <h6>3. Qui qui reprehenderit ut est illo numquam voluptatem?</h6>
-                <p>Enim inventore in consequuntur ipsam voluptatem consequatur beatae. Nostrum consequuntur voluptates et blanditiis.</p>
+                <h6>3. Can users customize their expense categories in the Expense Tracker app?</h6>
+                <p>Yes, users have the flexibility to customize expense categories based on their spending habits and preferences. They can add, edit, or delete categories to better organize their expenses.</p>
               </div>
 
             </div>
@@ -548,19 +355,19 @@
           <!-- F.A.Q Group 1 -->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Laborum dolorem quam porro</h5>
+              <h5 class="card-title">Frequently Asked Questions</h5>
 
               <div class="accordion accordion-flush" id="faq-group-1">
 
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsOne-1" type="button" data-bs-toggle="collapse">
-                      Debitis adipisci eius?
+                      How can pagination be implemented in the Expense Tracker app to display a limited number of expenses per page?
                     </button>
                   </h2>
                   <div id="faqsOne-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
                     <div class="accordion-body">
-                      Ut quasi odit odio totam accusamus vero eius. Nostrum asperiores voluptatem eos nulla ab dolores est asperiores iure. Quo est quis praesentium aut maiores. Corrupti sed aut expedita fugit vero dolorem. Nemo rerum sapiente. A quaerat dignissimos.
+                      Pagination can be implemented by retrieving expenses from the database in batches, typically using SQL queries with LIMIT and OFFSET clauses. The frontend can then display these batches of expenses in separate pages, with navigation controls to move between pages.
                     </div>
                   </div>
                 </div>
@@ -568,12 +375,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsOne-2" type="button" data-bs-toggle="collapse">
-                      Omnis fugiat quis repellendus?
+                      What is the process for adding a search bar to allow users to search for specific expenses in the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsOne-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
                     <div class="accordion-body">
-                      In minus quia impedit est quas deserunt deserunt et. Nulla non quo dolores minima fugiat aut saepe aut inventore. Qui nesciunt odio officia beatae iusto sed voluptatem possimus quas. Officia vitae sit voluptatem nostrum a.
+                      To add a search bar, the app can utilize JavaScript to capture user input and send asynchronous requests to the server, which then queries the database for expenses matching the search criteria. The server responds with the filtered results, which are displayed dynamically on the frontend without requiring a page refresh.
                     </div>
                   </div>
                 </div>
@@ -581,12 +388,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsOne-3" type="button" data-bs-toggle="collapse">
-                      Et occaecati praesentium aliquam modi incidunt?
+                      How can filtering by date range and expense category be implemented in the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsOne-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
                     <div class="accordion-body">
-                      Voluptates magni amet enim perspiciatis atque excepturi itaque est. Sit beatae animi incidunt eum repellat sequi ea saepe inventore. Id et vel et et. Nesciunt itaque corrupti quia ducimus. Consequatur maiores voluptatum fuga quod ut non fuga.
+                      Filtering functionality can be added by providing dropdown menus or date pickers for users to select their desired date range and expense category. When the user makes a selection, JavaScript sends a request to the server, which retrieves filtered expenses from the database based on the specified criteria and returns them to the frontend for display.
                     </div>
                   </div>
                 </div>
@@ -594,12 +401,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsOne-4" type="button" data-bs-toggle="collapse">
-                      Quo unde eaque vero dolor quis ipsam?
+                      What steps are involved in implementing a file upload feature for attaching receipts or bills to expenses in the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsOne-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
                     <div class="accordion-body">
-                      Numquam ut reiciendis aliquid. Quia veritatis quasi ipsam sed quo ut eligendi et non. Doloremque sed voluptatem at in voluptas aliquid dolorum.
+                      To enable file uploads, the frontend can include an input field of type "file" within the expense form. When a user selects a file, JavaScript captures the file data and sends it to the server using a multipart form-data request. The server then handles the file upload, storing the file in a designated folder and linking it to the corresponding expense in the database.
                     </div>
                   </div>
                 </div>
@@ -607,12 +414,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsOne-5" type="button" data-bs-toggle="collapse">
-                      Natus sunt quo atque mollitia accusamus?
+                      How can the Expense Tracker app ensure that users have a seamless experience when editing or deleting expenses?
                     </button>
                   </h2>
                   <div id="faqsOne-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
                     <div class="accordion-body">
-                      Aut necessitatibus maxime quis dolor et. Nihil laboriosam molestiae qui molestias placeat corrupti non quo accusamus. Nemo qui quis harum enim sed. Aliquam molestias pariatur delectus voluptas quidem qui rerum id quisquam. Perspiciatis voluptatem voluptatem eos. Vel aut minus labore at rerum eos.
+                      When a user initiates an edit or delete action, JavaScript can prompt for confirmation and then send the request to the server using AJAX. Upon receiving the request, the server updates or deletes the corresponding expense in the database and sends a success response back to the frontend. The frontend then updates the UI to reflect the changes without requiring a full page reload.
                     </div>
                   </div>
                 </div>
@@ -629,19 +436,19 @@
           <!-- F.A.Q Group 2 -->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Deserunt ut unde corporis</h5>
+              <h5 class="card-title">EXPENSE TRACKER</h5>
 
               <div class="accordion accordion-flush" id="faq-group-2">
 
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsTwo-1" type="button" data-bs-toggle="collapse">
-                      Cumque voluptatem recusandae blanditiis?
+                      How does the Expense Tracker app handle user authentication and account management?
                     </button>
                   </h2>
                   <div id="faqsTwo-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
                     <div class="accordion-body">
-                      Ut quasi odit odio totam accusamus vero eius. Nostrum asperiores voluptatem eos nulla ab dolores est asperiores iure. Quo est quis praesentium aut maiores. Corrupti sed aut expedita fugit vero dolorem. Nemo rerum sapiente. A quaerat dignissimos.
+                      The app implements user registration with features like email verification, password encryption, and social login integration. Users can securely sign in, reset passwords, and manage their account details.
                     </div>
                   </div>
                 </div>
@@ -649,12 +456,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsTwo-2" type="button" data-bs-toggle="collapse">
-                      Provident beatae eveniet placeat est aperiam repellat adipisci?
+                      Can users customize their spending categories in the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsTwo-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
                     <div class="accordion-body">
-                      In minus quia impedit est quas deserunt deserunt et. Nulla non quo dolores minima fugiat aut saepe aut inventore. Qui nesciunt odio officia beatae iusto sed voluptatem possimus quas. Officia vitae sit voluptatem nostrum a.
+                      Yes, users have the ability to create, edit, and delete spending categories based on their individual needs and preferences.
                     </div>
                   </div>
                 </div>
@@ -662,12 +469,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsTwo-3" type="button" data-bs-toggle="collapse">
-                      Minus aliquam modi id reprehenderit nihil?
+                      How are expenses added to the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsTwo-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
                     <div class="accordion-body">
-                      Voluptates magni amet enim perspiciatis atque excepturi itaque est. Sit beatae animi incidunt eum repellat sequi ea saepe inventore. Id et vel et et. Nesciunt itaque corrupti quia ducimus. Consequatur maiores voluptatum fuga quod ut non fuga.
+                      Users can add expenses through a form interface, providing details such as amount, merchant, category, date, and optional notes. Additionally, there may be features like receipt uploads or expense scanning for convenience.
                     </div>
                   </div>
                 </div>
@@ -675,12 +482,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsTwo-4" type="button" data-bs-toggle="collapse">
-                      Quaerat qui est iusto asperiores qui est reiciendis eos et?
+                      How are expenses displayed and organized within the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsTwo-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
                     <div class="accordion-body">
-                      Numquam ut reiciendis aliquid. Quia veritatis quasi ipsam sed quo ut eligendi et non. Doloremque sed voluptatem at in voluptas aliquid dolorum.
+                      Expenses are typically presented in a list or table format, sortable by date, amount, or category. The app may offer filtering options to view expenses within specific date ranges or categories.
                     </div>
                   </div>
                 </div>
@@ -688,12 +495,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsTwo-5" type="button" data-bs-toggle="collapse">
-                      Laboriosam asperiores eum?
+                      Does the Expense Tracker app support budgeting features?
                     </button>
                   </h2>
                   <div id="faqsTwo-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
                     <div class="accordion-body">
-                      Aut necessitatibus maxime quis dolor et. Nihil laboriosam molestiae qui molestias placeat corrupti non quo accusamus. Nemo qui quis harum enim sed. Aliquam molestias pariatur delectus voluptas quidem qui rerum id quisquam. Perspiciatis voluptatem voluptatem eos. Vel aut minus labore at rerum eos.
+                      Yes, users can set monthly budgets for different spending categories. The app may provide alerts or visual indicators when users approach or exceed their budget limits.
                     </div>
                   </div>
                 </div>
@@ -703,66 +510,66 @@
             </div>
           </div><!-- End F.A.Q Group 2 -->
 
-          <!-- F.A.Q Group 3 -->
-          <div class="card">
+           <!-- F.A.Q Group 3  -->
+           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Dolore occaecati ducimus quam</h5>
+              <h5 class="card-title">Security Question</h5>
 
               <div class="accordion accordion-flush" id="faq-group-3">
 
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsThree-1" type="button" data-bs-toggle="collapse">
-                      Assumenda doloribus est fugiat sint incidunt animi totam nisi?
+                      How can the Expense Tracker app leverage Chart.js to visualize expense data over custom date ranges?
                     </button>
                   </h2>
                   <div id="faqsThree-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
                     <div class="accordion-body">
-                      Ut quasi odit odio totam accusamus vero eius. Nostrum asperiores voluptatem eos nulla ab dolores est asperiores iure. Quo est quis praesentium aut maiores. Corrupti sed aut expedita fugit vero dolorem. Nemo rerum sapiente. A quaerat dignissimos.
+                      To visualize expense data, the app can use Chart.js to create interactive charts such as line charts or bar charts. JavaScript retrieves expense data from the server based on the selected date range, and then dynamically generates the chart using Chart.js with appropriate labels, datasets, and options. The chart is then displayed on the frontend for users to analyze their spending patterns.
                     </div>
                   </div>
-                </div>
+                </div> 
 
-                <div class="accordion-item">
+                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsThree-2" type="button" data-bs-toggle="collapse">
-                      Consequatur saepe explicabo odio atque nisi?
+                      What are the security considerations when implementing user authentication and password encryption in the Expense Tracker app?
                     </button>
                   </h2>
                   <div id="faqsThree-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
                     <div class="accordion-body">
-                      In minus quia impedit est quas deserunt deserunt et. Nulla non quo dolores minima fugiat aut saepe aut inventore. Qui nesciunt odio officia beatae iusto sed voluptatem possimus quas. Officia vitae sit voluptatem nostrum a.
+                      Security is crucial when handling user authentication and passwords. The app should use industry-standard encryption algorithms like bcrypt to securely hash and store passwords in the database. Additionally, sensitive user data should be transmitted over HTTPS to prevent eavesdropping. Measures such as salting passwords and implementing CAPTCHA can further enhance security against brute-force attacks and account takeover attempts.
                     </div>
                   </div>
-                </div>
+                </div> 
 
-                <div class="accordion-item">
+                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsThree-3" type="button" data-bs-toggle="collapse">
-                      Voluptates vel est fugiat molestiae rem sit eos sint?
+                      How can the Expense Tracker app ensure data integrity when users upload receipts or bills for their expenses?
                     </button>
                   </h2>
                   <div id="faqsThree-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
                     <div class="accordion-body">
-                      Voluptates magni amet enim perspiciatis atque excepturi itaque est. Sit beatae animi incidunt eum repellat sequi ea saepe inventore. Id et vel et et. Nesciunt itaque corrupti quia ducimus. Consequatur maiores voluptatum fuga quod ut non fuga.
+                      Data integrity can be maintained by validating uploaded files on the server-side to ensure they meet expected formats and file types. This validation process involves checking file extensions, size limits, and using techniques like file type verification to prevent malicious uploads. Once validated, the app can securely store the files on the server and associate them with the corresponding expense record in the database.
                     </div>
                   </div>
-                </div>
+                </div> 
 
-                <div class="accordion-item">
+                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsThree-4" type="button" data-bs-toggle="collapse">
-                      Ab ipsa cum autem voluptas doloremque velit?
+                      What strategies can be employed to optimize the performance of the Expense Tracker app, especially when dealing with large datasets?
                     </button>
                   </h2>
                   <div id="faqsThree-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
                     <div class="accordion-body">
-                      Numquam ut reiciendis aliquid. Quia veritatis quasi ipsam sed quo ut eligendi et non. Doloremque sed voluptatem at in voluptas aliquid dolorum.
+                      Performance optimization techniques include database indexing to speed up queries, caching frequently accessed data, and implementing lazy loading or infinite scrolling to load expenses incrementally. Additionally, minifying and compressing JavaScript and CSS files, optimizing image sizes, and leveraging content delivery networks (CDNs) for static assets can reduce page load times and enhance overall responsiveness.
                     </div>
                   </div>
-                </div>
+                </div> 
 
-                <div class="accordion-item">
+                 <!-- <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" data-bs-target="#faqsThree-5" type="button" data-bs-toggle="collapse">
                       Aliquam magni ducimus facilis numquam dolorum harum eveniet iusto?
@@ -773,25 +580,25 @@
                       Aut necessitatibus maxime quis dolor et. Nihil laboriosam molestiae qui molestias placeat corrupti non quo accusamus. Nemo qui quis harum enim sed. Aliquam molestias pariatur delectus voluptas quidem qui rerum id quisquam. Perspiciatis voluptatem voluptatem eos. Vel aut minus labore at rerum eos.
                     </div>
                   </div>
-                </div>
+                </div> -->
 
               </div>
 
             </div>
-          </div><!-- End F.A.Q Group 3 -->
+          </div>
 
-        </div>
+        <!-- </div>
 
       </div>
-    </section>
+    </section> -->
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <!-- <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
+    </div> -->
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
@@ -812,6 +619,7 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/session.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
