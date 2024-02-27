@@ -378,11 +378,13 @@
                         }
                       }
                     });
-                  } catch (error) {
+                  } 
+                  catch (error) {
                     console.error('Error fetching data:', error.response || error);
                     alert("An error occurred while fetching data. Please try again.");
                   }
-                } else {
+                } 
+                else {
                   alert("No session token found. Please login again.");
                 }
               });
@@ -454,7 +456,8 @@
                       console.error('Error fetching monthly expense data:', error.response || error);
                       alert("An error occurred while fetching monthly expense data. Please try again.");
                     }
-                  } else {
+                  } 
+                  else {
                     alert("No session token found. Please login again.");
                   }
                 });
@@ -472,7 +475,7 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Pie Chart</h5>
+              <h5 class="card-title">Pie Chart - Categories</h5>
 
 
 
@@ -518,13 +521,15 @@
                         }
                       });
                       console.log('Chart should be updated now');
-                    } catch (error) {
+                    } 
+                    catch (error) {
                       console.error('Error fetching expense data:', error.response || error);
                       if (!response || error.response.status !== 200) {
                         alert("An error occurred while fetching expense data. Please try again.");
                       }
                     }
-                  } else {
+                  } 
+                  else {
                     alert("No session token found. Please login again.");
                   }
                 });
@@ -539,60 +544,68 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Doughnut Chart</h5>
+              <h5 class="card-title">Doughnut Chart - Monthly Budget VS Actual Spending</h5>
 
 
 
               <!-- Doughnut Chart -->
               <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    let token = window.localStorage.getItem("expense_tracker_app_session");
-    if (token) {
-      token = JSON.parse(token).apitoken;
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                document.addEventListener("DOMContentLoaded", async () => {
+                  let token = window.localStorage.getItem("expense_tracker_app_session");
+                  if (token) {
+                      token = JSON.parse(token).apitoken;
 
-      try {
-        const response = await axios({
-          method: 'get',
-          url: 'http://localhost/expense_tracker_laravel/public/api/graph',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
+                      try {
+                          const response = await axios({
+                              method: 'get',
+                              url: 'http://localhost/expense_tracker_laravel/public/api/doughnut',
+                              headers: {
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `Bearer ${token}`
+                              }
+                          });
 
-        const categories = response.data.map(item => item.maincategory);
-        const amounts = response.data.map(item => parseFloat(item.total_amount));
+                          const monthlyBudget = response.data.monthly_budget;
+                          const totalActualSpending = response.data.total_actual_spending;
 
-        const ctx = document.getElementById('doughnutChart').getContext('2d');
-        const doughnutChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: categories,
-            datasets: [{
-              data: amounts,
-              backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(217, 0, 255)',
-                'rgb(143, 0, 255)',
-              ],
-              hoverOffset: 4
-            }]
-          }
-        });
-      } catch (error) {
-        console.error('Error fetching expense data:', error.response || error);
-        alert("An error occurred while fetching expense data. Please try again.");
-      }
-    } else {
-      alert("No session token found. Please login again.");
-    }
-  });
-</script>
+                          createDoughnutChart(monthlyBudget, totalActualSpending);
+                      } 
+                      catch (error) {
+                          console.error('Error fetching data:', error.response || error);
+                          alert("An error occurred while fetching data. Please try again.");
+                      }
+                  } 
+                  else {
+                      alert("No session token found. Please login again.");
+                  }
+              });
+
+              function createDoughnutChart(monthlyBudget, totalActualSpending) {
+                  const ctx = document.getElementById('doughnutChart').getContext('2d');
+                  const doughnutChart = new Chart(ctx, {
+                      type: 'doughnut',
+                      data: {
+                          labels: ['Monthly Budget', 'Total Actual Spending'],
+                          datasets: [{
+                              data: [monthlyBudget, totalActualSpending],
+                              backgroundColor: [
+                                  'rgba(255, 99, 132)',
+                                  'rgba(54, 162, 235)',
+                              ],
+                              hoverOffset: 4
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          maintainAspectRatio: false,
+                      }
+                  });
+              }
+
+              </script>
 
               <!-- End Doughnut CHart -->
 
