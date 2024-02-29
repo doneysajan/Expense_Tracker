@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px; /* Increased maximum width */
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2>Forgot password</h2>
+    <form id="forgotPasswordForm" method="post"> <!-- Added id attribute to the form -->
+        <div class="form-group">
+            <label for="email">Enter your email address:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+
+    const sendResetPasswordEmail = async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+
+        try {
+            const response = await axios.post('http://localhost/expense_tracker_laravel/public/api/forgotpassword', {
+                email: email
+            });
+
+            console.log(response.data);
+
+            if (response.data.success) {
+                alert('Password reset email sent successfully!');
+            } else {
+                alert('Failed to send password reset email. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error sending password reset email:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    };
+
+    forgotPasswordForm.addEventListener('submit', sendResetPasswordEmail);
+</script>
+
+
+</body>
+</html>
