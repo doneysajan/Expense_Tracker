@@ -194,7 +194,12 @@
         console.log(response.data);
         // Handle the response as needed
         if (response.data.success) {
-          alert("User registered successfully!");
+          alert("Enter OTP!");
+        // Extract email from the form data or wherever you have it
+        const email = document.getElementById('email').value;
+
+        // Redirect to OTP.html with email parameter
+        window.location.href = `http://localhost/Expense_Tracker/otp.html?email=${email}`;
         } else {
           alert("User registration failed. Please try again.");
         }

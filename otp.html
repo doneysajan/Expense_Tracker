@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+
+
+      <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Add Bootstrap CSS link here -->
+    
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Enter 4-Digit OTP</h5>
+
+                        <!-- Add the readonly email field -->
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="email" readonly>
+                        </div>
+
+                        <form id="otpForm" onsubmit="verifyOTP(event)">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="otp" maxlength="4" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit OTP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Include Axios library (make sure it's loaded before this script) -->
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+ <script>
+     // Get email from URL parameters
+     const urlParams = new URLSearchParams(window.location.search);
+     const emailParam = urlParams.get('email');
+     console.log('Email Parameter:', emailParam);
+     // Set the email value in the readonly field
+     document.getElementById('email').value = emailParam;
+
+     const verifyOTP = async (event) => {
+         event.preventDefault();
+
+         // Fetch the entered OTP
+         const enteredOTP = document.getElementById('otp').value;
+         console.log(enteredOTP);
+
+         // Use Axios to send a request to your server for OTP verification
+         try {
+             const response = await axios.post('http://localhost/expense_tracker_laravel/public/api/verifyotp', {
+                 otp: enteredOTP,
+                 email: emailParam, // Pass the email to the server
+                 // Add any other required parameters
+             });
+
+             // Handle the response as needed
+             console.log(response.data);
+
+             if (response.data.success) {
+                 alert('OTP verification successful!');
+                 // Redirect to the desired page upon successful OTP verification
+                 window.location.href = 'http://localhost/Expense_Tracker/pages-login.html';
+             } else {
+                 alert('OTP verification failed. Please try again.');
+             }
+         } catch (error) {
+             console.error('Error submitting OTP:', error);
+             alert('An error occurred. Please try again later.');
+         }
+     };
+ </script>
+
+</body>
+
+</html>
