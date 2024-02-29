@@ -604,81 +604,104 @@
 
         <!-- Right side columns -->
         <div class="col-lg-4">
-
-
-          <!-- Budget Report -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
+              <div class="card-body pb-0">
+                  <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+                  <!-- Add the missing div with ID "budgetChart" -->
+                  <div id="budgetChart" style="min-height: 400px;"></div>
+      
+                  <!-- Include the necessary scripts -->
+                  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", async () => {
+                        let token = window.localStorage.getItem("expense_tracker_app_session");
+                        if (token) {
+                            token = JSON.parse(token).apitoken;
+                
+                            try {
+                                const response = await axios({
+                                    method: 'get',
+                                    url: 'http://localhost/expense_tracker_laravel/public/api/budget',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Authorization': `Bearer ${token}`
+                                    }
+                                });
+                
+                                if (response.data && response.data.actual_spending) {
+                                    // Get the total monthly budget from the user
+                                    const monthlyBudget = response.data.monthly_budget;
+                
+                                    // Define main categories
+                                    const mainCategories = ['Food', 'Fuel', 'Others', 'Rent', 'Electricity'];
+                
+                                    // Calculate allocated budget for each category based on the total monthly budget
+                                    const allocatedBudgets = {};
+                                    mainCategories.forEach(category => {
+                                        allocatedBudgets[category] = monthlyBudget / mainCategories.length;
+                                    });
+                
+                                    // Initialize arrays to hold actual spending and total allocated budgets
+                                    const actualSpendingValues = [];
+                                    const allocatedBudgetValues = [];
+                
+                                    // Iterate over main categories to calculate actual spending and allocated budgets
+                                    mainCategories.forEach(category => {
+                                        actualSpendingValues.push(response.data.actual_spending[category] || 0);
+                                        allocatedBudgetValues.push(allocatedBudgets[category]);
+                                        console.log(`Actual Spending for ${category}: ${response.data.actual_spending[category] || 0}`);
+                                        console.log(`Allocated Budget for ${category}: ${allocatedBudgets[category]}`);
+                                    });
+                
+                                    // Find the element with the ID "budgetChart"
+                                    const budgetChartElement = document.querySelector("#budgetChart");
+                                    if (budgetChartElement) {
+                                        // Initialize the chart
+                                        var budgetChart = echarts.init(budgetChartElement).setOption({
+                                            color: ['#61a0a8', '#63b52e'], // Blue for allocated budget, green for actual spending
+                                            legend: {
+                                                data: ['Allocated Budget', 'Actual Spending']
+                                            },
+                                            radar: {
+                                                indicator: mainCategories.map(category => ({ name: category, max: Math.max(allocatedBudgets[category], ...actualSpendingValues) }))
+                                            },
+                                            series: [{
+                                                name: 'Budget vs spending',
+                                                type: 'radar',
+                                                data: [{
+                                                    value: allocatedBudgetValues, // Allocated budgets
+                                                    name: 'Allocated Budget'
+                                                },
+                                                {
+                                                    value: actualSpendingValues, // Actual spending
+                                                    name: 'Actual Spending'
+                                                }]
+                                            }]
+                                        });
+                                    } else {
+                                        console.error('Element with ID "budgetChart" not found.');
+                                    }
+                                } else {
+                                    throw new Error('Invalid or missing data format in the response');
+                                }
+                            } catch (error) {
+                                console.error('Error fetching data:', error.response || error);
+                                alert("An error occurred while fetching data. Please try again.");
+                            }
                         }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Budget Report -->
+                    });
+                </script>
+                
+                
+                
+                
+                
+              </div>
+          </div>
+      </div>
+      
+        <!-- End Budget Report -->
 
           <!-- Website Traffic -->
           <!-- <div class="card">
