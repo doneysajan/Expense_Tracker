@@ -67,12 +67,12 @@
           </a>
         </li> -->
 
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
@@ -138,17 +138,15 @@
               <a href="#">Show all notifications</a>
             </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          </ul>
+        </li>End Notification Nav -->
 
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -204,9 +202,8 @@
               <a href="#">Show all messages</a>
             </li>
 
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
+          </ul>
+        </li>End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
@@ -441,7 +438,7 @@
                             backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
                           'rgba(75, 192, 192, 0.2)',
                           'rgba(54, 162, 235, 0.2)',
                           'rgba(153, 102, 255, 0.2)',
@@ -455,7 +452,7 @@
                             borderColor: [
                           'rgb(255, 99, 132, 1)',
                           'rgb(255, 159, 64, 1)',
-                          'rgb(255, 205, 86, 1)',
+                          'rgb(153, 102, 255, 1)',
                           'rgb(75, 192, 192, 1)',
                           'rgb(54, 162, 235, 1)',
                           'rgb(153, 102, 255, 1)',
@@ -491,9 +488,6 @@
                  
               <!-- End Bar CHart -->
 
-
-
-
             </div>
           </div>
         </div>
@@ -502,9 +496,6 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Pie Chart - Categories</h5>
-
-
-
 
               <!-- Pie Chart -->
               <canvas id="pieChart" style="max-height: 400px;"></canvas>
@@ -572,10 +563,8 @@
             <div class="card-body">
               <h5 class="card-title">Doughnut Chart - Monthly Budget VS Actual Spending</h5>
 
-
-
               <!-- Doughnut Chart -->
-              <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+              <canvas id="doughnutChart" style="max-height: 355px;"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -627,6 +616,7 @@
                       options: {
                           responsive: true,
                           maintainAspectRatio: false,
+                          cutout: '50%'
                       }
                   });
               }
@@ -634,249 +624,6 @@
               </script>
 
               <!-- End Doughnut CHart -->
-
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Radar Chart</h5> -->
-
-              <!-- Radar Chart -->
-              <!-- <canvas id="radarChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#radarChart'), {
-                    type: 'radar',
-                    data: {
-                      labels: [
-                        'Eating',
-                        'Drinking',
-                        'Sleeping',
-                        'Designing',
-                        'Coding',
-                        'Cycling',
-                        'Running'
-                      ],
-                      datasets: [{
-                        label: 'First Dataset',
-                        data: [65, 59, 90, 81, 56, 55, 40],
-                        fill: true,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        pointBackgroundColor: 'rgb(255, 99, 132)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(255, 99, 132)'
-                      }, {
-                        label: 'Second Dataset',
-                        data: [28, 48, 40, 19, 96, 27, 100],
-                        fill: true,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgb(54, 162, 235)',
-                        pointBackgroundColor: 'rgb(54, 162, 235)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(54, 162, 235)'
-                      }]
-                    },
-                    options: {
-                      elements: {
-                        line: {
-                          borderWidth: 3
-                        }
-                      }
-                    }
-                  });
-                }); -->
-              </script>
-              <!-- End Radar CHart -->
-
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Polar Area Chart</h5> -->
-
-              <!-- Polar Area Chart -->
-              <!-- <canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#polarAreaChart'), {
-                    type: 'polarArea',
-                    data: {
-                      labels: [
-                        'Red',
-                        'Green',
-                        'Yellow',
-                        'Grey',
-                        'Blue'
-                      ],
-                      datasets: [{
-                        label: 'My First Dataset',
-                        data: [11, 16, 7, 3, 14],
-                        backgroundColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(75, 192, 192)',
-                          'rgb(255, 205, 86)',
-                          'rgb(201, 203, 207)',
-                          'rgb(54, 162, 235)'
-                        ]
-                      }]
-                    }
-                  });
-                }); -->
-              </script>
-              <!-- End Polar Area Chart -->
-
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Stacked Bar Chart</h5> -->
-
-              <!-- Stacked Bar Chart -->
-              <!-- <canvas id="stakedBarChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#stakedBarChart'), {
-                    type: 'bar',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                          label: 'Dataset 1',
-                          data: [-75, -15, 18, 48, 74],
-                          backgroundColor: 'rgb(255, 99, 132)',
-                        },
-                        {
-                          label: 'Dataset 2',
-                          data: [-11, -1, 12, 62, 95],
-                          backgroundColor: 'rgb(75, 192, 192)',
-                        },
-                        {
-                          label: 'Dataset 3',
-                          data: [-44, -5, 22, 35, 62],
-                          backgroundColor: 'rgb(255, 205, 86)',
-                        },
-                      ]
-                    },
-                    options: {
-                      plugins: {
-                        title: {
-                          display: true,
-                          text: 'Chart.js Bar Chart - Stacked'
-                        },
-                      },
-                      responsive: true,
-                      scales: {
-                        x: {
-                          stacked: true,
-                        },
-                        y: {
-                          stacked: true
-                        }
-                      }
-                    }
-                  });
-                }); -->
-              </script>
-              <!-- End Stacked Bar Chart -->
-
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Bubble Chart</h5> -->
-
-              <!-- Bubble Chart -->
-              <!-- <canvas id="bubbleChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#bubbleChart'), {
-                    type: 'bubble',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                          label: 'Dataset 1',
-                          data: [{
-                              x: 20,
-                              y: 30,
-                              r: 15
-                            },
-                            {
-                              x: 40,
-                              y: 10,
-                              r: 10
-                            },
-                            {
-                              x: 15,
-                              y: 37,
-                              r: 12
-                            },
-                            {
-                              x: 32,
-                              y: 42,
-                              r: 33
-                            }
-                          ],
-                          borderColor: 'rgb(255, 99, 132)',
-                          backgroundColor: 'rgba(255, 99, 132, 0.5)'
-                        },
-                        {
-                          label: 'Dataset 2',
-                          data: [{
-                              x: 40,
-                              y: 25,
-                              r: 22
-                            },
-                            {
-                              x: 24,
-                              y: 47,
-                              r: 11
-                            },
-                            {
-                              x: 65,
-                              y: 11,
-                              r: 14
-                            },
-                            {
-                              x: 11,
-                              y: 55,
-                              r: 8
-                            }
-                          ],
-                          borderColor: 'rgb(75, 192, 192)',
-                          backgroundColor: 'rgba(75, 192, 192, 0.5)'
-                        }
-                      ]
-                    },
-                    options: {
-                      responsive: true,
-                      plugins: {
-                        legend: {
-                          position: 'top',
-                        },
-                        title: {
-                          display: true,
-                          text: 'Chart.js Bubble Chart'
-                        }
-                      }
-                    }
-                  });
-                }); -->
-              </script>
-              <!-- End Bubble Chart -->
 
             </div>
           </div>
