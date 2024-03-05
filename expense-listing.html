@@ -537,6 +537,8 @@
     // Clear existing table rows
     tableBody.innerHTML = '';
 
+    
+
     // Iterate over each item in the expense data and append it to the table
     expenseData.forEach(function (item) {
       // Create a new row
@@ -562,7 +564,7 @@
     const expenseTable = document.querySelector("#expenseTable");
     const dataTable =  new simpleDatatables.DataTable(expenseTable);
 
-    // Add event listeners to the edit buttons
+   // Add event listeners to the edit buttons
 const editButtons = document.querySelectorAll('.edit-btn');
 editButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -575,16 +577,15 @@ editButtons.forEach(button => {
         // Fill the modal with the corresponding expense data
         const editModal = document.getElementById('editModal');
         const editDateInput = editModal.querySelector('#editDate');
-        const editCategoryInput = editModal.querySelector('#editCategory');
+        const editCategoryInput = editModal.querySelector('#editCategory'); // Check if this selector matches the category dropdown element
         const editMerchantInput = editModal.querySelector('#editMerchant');
-        //const editPaymentInput = editModal.querySelector('#editPayment');
-        const editAmountInput = editModal.querySelector('#editAmount');
+        const editAmountInput = editModal.querySelector('#editAmount'); 
 
         // Set input values with data from the row
         editDateInput.value = row.cells[1].textContent;
-        editCategoryInput.value = row.cells[2].textContent;
+        const categoryValue = row.cells[2].textContent;
+        editCategoryInput.querySelector(`option[value="${categoryValue}"]`).selected = true; // Check if editCategoryInput is correctly initialized
         editMerchantInput.value = row.cells[3].textContent;
-        //editPaymentInput.value = row.cells[4].textContent;
         editAmountInput.value = row.cells[4].textContent;
 
         // Show the modal
@@ -596,6 +597,7 @@ editButtons.forEach(button => {
         saveChangesBtn.dataset.expenseId = id;
     });
 });
+
 
 // Update expense when clicking save changes button
 document.getElementById('saveChangesBtn').addEventListener('click', async () => {
