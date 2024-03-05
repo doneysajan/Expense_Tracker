@@ -537,8 +537,6 @@
     // Clear existing table rows
     tableBody.innerHTML = '';
 
-    
-
     // Iterate over each item in the expense data and append it to the table
     expenseData.forEach(function (item) {
       // Create a new row
@@ -584,10 +582,14 @@ editButtons.forEach(button => {
         // Set input values with data from the row
         editDateInput.value = row.cells[1].textContent;
         const categoryValue = row.cells[2].textContent;
-        editCategoryInput.querySelector(`option[value="${categoryValue}"]`).selected = true; // Check if editCategoryInput is correctly initialized
+        const option = editCategoryInput.querySelector(`option[value="${categoryValue}"]`);
+        if (option) {
+            option.selected = true;
+        } else {
+            console.error('Option not found for category value:', categoryValue);
+        }
         editMerchantInput.value = row.cells[3].textContent;
         editAmountInput.value = row.cells[4].textContent;
-
         // Show the modal
         const modal = new bootstrap.Modal(editModal);
         modal.show();
