@@ -330,11 +330,11 @@
            <div class="card">
             <div class="card-body">
                <h5 class="card-title">Datatables</h5>
-            <!-- <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>  -->
+            <!-- <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code></code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>  -->
               
               
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table" id="expenseTable">
                 <thead>
                   <tr>
                     <th>ID</th> <!-- Added ID column -->
@@ -532,7 +532,7 @@
   // Function to update the UI with expense data
   const updateExpenseUI = (expenseData) => {
     // Select the table body
-    const tableBody = document.querySelector('table.datatable tbody');
+    const tableBody = document.querySelector('table tbody');
 
     // Clear existing table rows
     tableBody.innerHTML = '';
@@ -558,6 +558,9 @@
       // Append the row to the table body
       tableBody.appendChild(newRow);
     });
+
+    const expenseTable = document.querySelector("#expenseTable");
+    const dataTable =  new simpleDatatables.DataTable(expenseTable);
 
     // Add event listeners to the edit buttons
 const editButtons = document.querySelectorAll('.edit-btn');
@@ -706,7 +709,7 @@ document.getElementById('exportExcelButton').addEventListener('click', () => {
 
 
 const exportToCSV = () => {
-    const table = document.querySelector('table.datatable');
+    const table = document.querySelector('table');
     const rows = table.querySelectorAll('tr');
     let csv = [];
 
@@ -736,7 +739,7 @@ const exportToCSV = () => {
 };
 
 const exportToExcel = () => {
-    const table = document.querySelector('table.datatable');
+    const table = document.querySelector('table');
     const rows = table.querySelectorAll('tr');
 
     let excel = "<table>";
